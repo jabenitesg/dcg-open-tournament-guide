@@ -851,9 +851,10 @@
     .map-head > p { max-width: 570px; margin: 0; color: var(--muted); line-height: 1.75; }
     .map-frame { position: relative; display: block; padding: 10px; overflow: hidden; border: 1px solid var(--line); background: white; box-shadow: var(--shadow); }
     .map-image-stage { position: relative; aspect-ratio: 1800 / 814; overflow: hidden; background: white; }
-    .map-image-link { display: block; width: 100%; height: 100%; transform: translateX(-8.5%); }
-    .map-frame img { width: 100%; height: 100%; display: block; object-fit: contain; background: #f2efe8; }
-    .map-pointer { position: absolute; left: calc(var(--x) - 8.5%); top: var(--y); z-index: 2; width: 34px; height: 34px; display: grid; place-items: center; border: 3px solid white; border-radius: 50%; background: var(--blue); color: white; font: 850 10px/1 "Montserrat",sans-serif; box-shadow: 0 5px 16px rgba(14,14,49,.4); opacity: 0; pointer-events: none; transform: translate(-50%,-50%) scale(.55); transition: opacity .18s ease, transform .18s ease; }
+    .map-canvas { position: absolute; inset: 0; transform: translateX(-4%) scale(1.18); transform-origin: center; }
+    .map-image-link { display: block; width: 100%; height: 100%; }
+    .map-frame img { width: 100%; height: 100%; display: block; object-fit: contain; background: white; }
+    .map-pointer { position: absolute; left: var(--x); top: var(--y); z-index: 2; width: 34px; height: 34px; display: grid; place-items: center; border: 3px solid white; border-radius: 50%; background: var(--blue); color: white; font: 850 10px/1 "Montserrat",sans-serif; box-shadow: 0 5px 16px rgba(14,14,49,.4); opacity: 0; pointer-events: none; transform: translate(-50%,-50%) scale(.55); transition: opacity .18s ease, transform .18s ease; }
     .map-pointer::after { content: ""; position: absolute; inset: -8px; border: 2px solid rgba(46,96,222,.42); border-radius: inherit; animation: map-pulse 1.55s ease-out infinite; }
     .map-pointer.active { opacity: 1; transform: translate(-50%,-50%) scale(1); }
     @keyframes map-pulse { 0% { transform: scale(.75); opacity: 1; } 100% { transform: scale(1.35); opacity: 0; } }
@@ -1514,18 +1515,20 @@
           <div class="map-visual-column">
             <div class="map-frame" id="interactive-course-map">
               <div class="map-image-stage">
-                <a class="map-image-link" href="https://static.wixstatic.com/media/3b7ba0_c9b7b91997164ee08fc2f767316b12fe~mv2.png" target="_blank" rel="noopener" aria-label="Open the official Uplands course map at full size">
-                  <img src="assets/uplands-course-map-clean.png" alt="Digital Commerce Group Open spectator map of Uplands Golf Club" loading="lazy">
-                </a>
-                <span class="map-pointer" data-map-point="A" style="--x:61%;--y:48%" aria-hidden="true">A</span>
-                <span class="map-pointer" data-map-point="A" style="--x:87%;--y:14%" aria-hidden="true">A</span>
-                <span class="map-pointer" data-map-point="B" style="--x:59.5%;--y:47%" aria-hidden="true">B</span>
-                <span class="map-pointer" data-map-point="CH" style="--x:57.5%;--y:53%" aria-hidden="true">CH</span>
-                <span class="map-pointer" data-map-point="FB" style="--x:54.5%;--y:51%" aria-hidden="true">FB</span>
-                <span class="map-pointer" data-map-point="PF" style="--x:43.5%;--y:61%" aria-hidden="true">PF</span>
-                <span class="map-pointer" data-map-point="P" style="--x:52%;--y:51%" aria-hidden="true">P</span>
-                <span class="map-pointer" data-map-point="SC" style="--x:59%;--y:43.5%" aria-hidden="true">SC</span>
-                <span class="map-pointer" data-map-point="W" style="--x:50%;--y:51%" aria-hidden="true">W</span>
+                <div class="map-canvas">
+                  <a class="map-image-link" href="https://static.wixstatic.com/media/3b7ba0_c9b7b91997164ee08fc2f767316b12fe~mv2.png" target="_blank" rel="noopener" aria-label="Open the official Uplands course map at full size">
+                    <img src="assets/uplands-course-map-clean.png" alt="Digital Commerce Group Open spectator map of Uplands Golf Club" loading="lazy">
+                  </a>
+                  <span class="map-pointer" data-map-point="A" style="--x:61%;--y:48%" aria-hidden="true">A</span>
+                  <span class="map-pointer" data-map-point="A" style="--x:87%;--y:14%" aria-hidden="true">A</span>
+                  <span class="map-pointer" data-map-point="B" style="--x:59.5%;--y:47%" aria-hidden="true">B</span>
+                  <span class="map-pointer" data-map-point="CH" style="--x:57.5%;--y:53%" aria-hidden="true">CH</span>
+                  <span class="map-pointer" data-map-point="FB" style="--x:54.5%;--y:51%" aria-hidden="true">FB</span>
+                  <span class="map-pointer" data-map-point="PF" style="--x:43.5%;--y:61%" aria-hidden="true">PF</span>
+                  <span class="map-pointer" data-map-point="P" style="--x:52%;--y:51%" aria-hidden="true">P</span>
+                  <span class="map-pointer" data-map-point="SC" style="--x:59%;--y:43.5%" aria-hidden="true">SC</span>
+                  <span class="map-pointer" data-map-point="W" style="--x:50%;--y:51%" aria-hidden="true">W</span>
+                </div>
               </div>
             </div>
             <div class="map-actions"><button class="map-action primary" id="map-zoom-open" type="button"><i class="ph ph-magnifying-glass-plus" aria-hidden="true"></i> Enlarge map</button><a class="map-action" href="https://www.google.com/maps/search/?api=1&amp;query=Uplands+Golf+Club+Victoria+BC" target="_blank" rel="noopener"><i class="ph ph-navigation-arrow" aria-hidden="true"></i> Get directions</a></div>
