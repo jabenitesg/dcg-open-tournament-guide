@@ -525,11 +525,6 @@
       height: 5px; inset: auto 0 0; opacity: 1; clip-path: none;
       background: linear-gradient(90deg, var(--blue) 0 34%, #3478e7 34% 67%, var(--gold) 67%);
     }
-    .hero-inner::before {
-      content: "2026"; position: absolute; z-index: -1; right: -8px; top: -86px;
-      color: rgba(255,255,255,.105); font: italic 500 clamp(6rem, 27vw, 12rem)/1 "Cormorant Garamond", Georgia, serif;
-      letter-spacing: -.06em; pointer-events: none;
-    }
     .hero .eyebrow { color: var(--gold); }
     .hero h1 {
       font-family: "Cormorant Garamond", Georgia, serif; font-style: italic; font-weight: 500;
@@ -741,7 +736,6 @@
 
     @media (min-width: 720px) {
       .hero { min-height: 850px; }
-      .hero-inner::before { right: 0; top: -100px; }
       .quick-action { min-height: 165px; }
       .charity-copy { padding-left: 56px; }
       .letter-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
@@ -750,7 +744,6 @@
 
     @media (min-width: 980px) {
       .hero { min-height: 900px; }
-      .hero-inner::before { top: -170px; }
       .quick-actions { margin-top: 48px; }
       .quick-action { min-height: 185px; padding: 24px; }
       .quick-action strong { font-size: 30px; }
