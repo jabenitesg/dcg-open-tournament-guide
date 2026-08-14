@@ -1472,11 +1472,16 @@
       .hero-meta { font-size: 13px; line-height: 1.45; }
       .hero-meta { margin: 28px 0 34px; gap: 11px; }
       .hero-meta span { width: 100%; }
-      .hero .quick-actions { gap: 12px; }
-      .hero .quick-action { min-height: 140px; padding: 20px; }
-      .quick-action strong { font-size: 15px; }
+      .hero .quick-actions { gap: 9px; }
+      .hero .quick-action { min-height: 104px; padding: 14px 15px; gap: 7px; }
+      .hero .quick-action strong { font-size: 14px; }
+      .hero .quick-action .status { padding: 3px 5px; font-size: 8px; }
       .hero-utility { margin-top: 16px; padding: 16px; gap: 11px; }
       .map-directory b { font-size: 13px; line-height: 1.25; }
+    }
+
+    @media (max-width: 420px) {
+      .hero .quick-action { min-height: 96px; padding: 12px 13px; }
     }
 
     h1, h2, h3,
