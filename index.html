@@ -199,7 +199,7 @@
     }
     .quick-action:hover { transform: translateY(-3px); background: rgba(255,255,255,.18); }
     .quick-action strong { font-size: 14px; line-height: 1.15; }
-    .quick-action-top { display: flex; align-items: center; justify-content: space-between; }
+    .quick-action-top { display: flex; align-items: center; justify-content: flex-end; }
     .qa-icon { font: 800 18px/1 Georgia, serif; color: var(--lime); }
     .arrow { font-size: 20px; line-height: 1; }
     .status {
@@ -1009,7 +1009,7 @@
     .schedule-photo time { position: absolute; left: 12px; top: 12px; padding: 9px 11px; border-radius: 3px; background: var(--gold); color: var(--forest-deep); font-size: 8px; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
     .schedule-copy { min-height: 176px; padding: 22px; display: flex; flex-direction: column; }
     .schedule-copy > span { color: var(--blue); font-size: 8px; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
-    .schedule-copy h3 { margin: 26px 0 10px; font: 700 20px/1.05 "Montserrat", sans-serif; letter-spacing: -.03em; }
+    .schedule-copy h3 { margin: 26px 0 10px; color: var(--ink); font: 700 20px/1.05 "Montserrat", sans-serif; letter-spacing: -.03em; }
     .schedule-copy p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.55; }
     .schedule-card.cut-card { border-color: rgba(195,165,112,.7); box-shadow: inset 0 -4px 0 var(--gold); }
     .schedule-card.final-card .schedule-photo time { background: var(--blue); color: white; }
@@ -1068,6 +1068,8 @@
     .map-directory .map-category { color: var(--blue); font-size: 7px; font-weight: 850; letter-spacing: .1em; text-align: right; text-transform: uppercase; }
     .map-directory b { margin-top: auto; font-size: 12px; line-height: 1.2; text-transform: uppercase; }
     .map-directory .map-card-note { margin: 5px 0 0; color: var(--muted); font-size: 9px; line-height: 1.4; }
+    .map-explorer { display: grid; gap: 12px; }
+    .map-visual-column { min-width: 0; }
 
     .essentials-band { padding: 74px 0; background: var(--cream); color: var(--ink); }
     .essential-grid { display: grid; gap: 8px; }
@@ -1159,6 +1161,14 @@
       .charity-mark { width: 170px; height: 170px; }
       .charity-feature-content > p:not(.charity-label) { font-size: 17px; line-height: 1.65; }
       .compact-letters { padding: 68px 0; }
+      .map-explorer { grid-template-columns: minmax(0,1.45fr) minmax(360px,.8fr); align-items: start; gap: 16px; }
+      .map-explorer .map-directory { margin-top: 0; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+      .map-explorer .map-directory-item { min-height: 120px; padding: 13px; }
+      .map-explorer .map-card-top { margin-bottom: 14px; }
+      .map-explorer .map-directory .map-code { width: 34px; height: 34px; flex-basis: 34px; font-size: 11px; }
+      .map-explorer .map-directory b { font-size: 11px; }
+      .map-explorer .map-directory .map-card-note { font-size: 9px; }
+      .map-explorer .map-actions { width: 100%; min-width: 0; }
     }
 
     /* Spectator-first refinement */
@@ -1437,16 +1447,16 @@
         <div class="hero-meta"><span>September 10–13, 2026</span><span>Uplands Golf Club · Victoria, BC</span></div>
         <div class="quick-actions" aria-label="Quick tournament actions">
           <a class="quick-action" href="https://www.pgatour.com/americas/tournaments/2026/digital-commerce-group-open/Y2026007/leaderboard" target="_blank" rel="noopener">
-            <span class="quick-action-top"><span class="qa-icon">01</span><span class="arrow">↗</span></span><strong>Leaderboard</strong><span class="status">Live on PGA TOUR</span>
+            <span class="quick-action-top"><span class="arrow">↗</span></span><strong>Leaderboard</strong><span class="status">Live on PGA TOUR</span>
           </a>
           <a class="quick-action" href="https://www.pgatour.com/americas/tournaments/2026/digital-commerce-group-open/Y2026007/tee-times" target="_blank" rel="noopener">
-            <span class="quick-action-top"><span class="qa-icon">02</span><span class="arrow">↗</span></span><strong>Tee Times</strong><span class="status">Official pairings</span>
+            <span class="quick-action-top"><span class="arrow">↗</span></span><strong>Tee Times</strong><span class="status">Official pairings</span>
           </a>
           <a class="quick-action" href="#course-map">
-            <span class="quick-action-top"><span class="qa-icon">03</span><span class="arrow">↓</span></span><strong>Course Map</strong><span class="status">View in guide</span>
+            <span class="quick-action-top"><span class="arrow">↓</span></span><strong>Course Map</strong><span class="status">View in guide</span>
           </a>
           <a class="quick-action" href="#today">
-            <span class="quick-action-top"><span class="qa-icon">04</span><span class="arrow">↓</span></span><strong>Schedule</strong><span class="status">Rounds &amp; cut</span>
+            <span class="quick-action-top"><span class="arrow">↓</span></span><strong>Schedule</strong><span class="status">Rounds &amp; cut</span>
           </a>
         </div>
         <div class="hero-utility" aria-label="Tournament essentials"><span><i class="ph ph-clock" aria-hidden="true"></i> First groups 7:30 AM</span><span><i class="ph ph-signpost" aria-hidden="true"></i> Nos. 1 &amp; 10 tees</span><span><i class="ph ph-ticket" aria-hidden="true"></i> Daily &amp; weekly admission</span></div>
@@ -1500,32 +1510,36 @@
           <button type="button" data-map-filter="arrival" aria-pressed="false">Arrival</button>
         </div>
         <p class="map-key-note">Tap a card below to point out its location. The same code is printed on the official map.</p>
-        <div class="map-frame" id="interactive-course-map">
-          <div class="map-image-stage">
-            <a class="map-image-link" href="https://static.wixstatic.com/media/3b7ba0_c9b7b91997164ee08fc2f767316b12fe~mv2.png" target="_blank" rel="noopener" aria-label="Open the official Uplands course map at full size">
-              <img src="assets/uplands-course-map-clean.png" alt="Digital Commerce Group Open spectator map of Uplands Golf Club" loading="lazy">
-            </a>
-            <span class="map-pointer" data-map-point="A" style="--x:61%;--y:48%" aria-hidden="true">A</span>
-            <span class="map-pointer" data-map-point="A" style="--x:87%;--y:14%" aria-hidden="true">A</span>
-            <span class="map-pointer" data-map-point="B" style="--x:59.5%;--y:47%" aria-hidden="true">B</span>
-            <span class="map-pointer" data-map-point="CH" style="--x:57.5%;--y:53%" aria-hidden="true">CH</span>
-            <span class="map-pointer" data-map-point="FB" style="--x:54.5%;--y:51%" aria-hidden="true">FB</span>
-            <span class="map-pointer" data-map-point="PF" style="--x:43.5%;--y:61%" aria-hidden="true">PF</span>
-            <span class="map-pointer" data-map-point="P" style="--x:52%;--y:51%" aria-hidden="true">P</span>
-            <span class="map-pointer" data-map-point="SC" style="--x:59%;--y:43.5%" aria-hidden="true">SC</span>
-            <span class="map-pointer" data-map-point="W" style="--x:50%;--y:51%" aria-hidden="true">W</span>
+        <div class="map-explorer">
+          <div class="map-visual-column">
+            <div class="map-frame" id="interactive-course-map">
+              <div class="map-image-stage">
+                <a class="map-image-link" href="https://static.wixstatic.com/media/3b7ba0_c9b7b91997164ee08fc2f767316b12fe~mv2.png" target="_blank" rel="noopener" aria-label="Open the official Uplands course map at full size">
+                  <img src="assets/uplands-course-map-clean.png" alt="Digital Commerce Group Open spectator map of Uplands Golf Club" loading="lazy">
+                </a>
+                <span class="map-pointer" data-map-point="A" style="--x:61%;--y:48%" aria-hidden="true">A</span>
+                <span class="map-pointer" data-map-point="A" style="--x:87%;--y:14%" aria-hidden="true">A</span>
+                <span class="map-pointer" data-map-point="B" style="--x:59.5%;--y:47%" aria-hidden="true">B</span>
+                <span class="map-pointer" data-map-point="CH" style="--x:57.5%;--y:53%" aria-hidden="true">CH</span>
+                <span class="map-pointer" data-map-point="FB" style="--x:54.5%;--y:51%" aria-hidden="true">FB</span>
+                <span class="map-pointer" data-map-point="PF" style="--x:43.5%;--y:61%" aria-hidden="true">PF</span>
+                <span class="map-pointer" data-map-point="P" style="--x:52%;--y:51%" aria-hidden="true">P</span>
+                <span class="map-pointer" data-map-point="SC" style="--x:59%;--y:43.5%" aria-hidden="true">SC</span>
+                <span class="map-pointer" data-map-point="W" style="--x:50%;--y:51%" aria-hidden="true">W</span>
+              </div>
+            </div>
+            <div class="map-actions"><button class="map-action primary" id="map-zoom-open" type="button"><i class="ph ph-magnifying-glass-plus" aria-hidden="true"></i> Enlarge map</button><a class="map-action" href="https://www.google.com/maps/search/?api=1&amp;query=Uplands+Golf+Club+Victoria+BC" target="_blank" rel="noopener"><i class="ph ph-navigation-arrow" aria-hidden="true"></i> Get directions</a></div>
           </div>
-        </div>
-        <div class="map-actions"><button class="map-action primary" id="map-zoom-open" type="button"><i class="ph ph-magnifying-glass-plus" aria-hidden="true"></i> Enlarge map</button><a class="map-action" href="https://www.google.com/maps/search/?api=1&amp;query=Uplands+Golf+Club+Victoria+BC" target="_blank" rel="noopener"><i class="ph ph-navigation-arrow" aria-hidden="true"></i> Get directions</a></div>
-        <div class="map-directory" aria-live="polite">
-          <button type="button" class="map-directory-item" data-map-category="arrival" data-map-target="A" aria-pressed="false"><span class="map-card-top"><span class="map-code">A</span><span class="map-category">Arrival</span></span><b>Public Admissions Gate</b><span class="map-card-note">Show “A” on the map.</span></button>
-          <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="B" aria-pressed="false"><span class="map-card-top"><span class="map-code">B</span><span class="map-category">Watch Golf</span></span><b>Bleacher Area</b><span class="map-card-note">Show “B” on the map.</span></button>
-          <button type="button" class="map-directory-item" data-map-category="amenities" data-map-target="CH" aria-pressed="false"><span class="map-card-top"><span class="map-code">CH</span><span class="map-category">Amenities</span></span><b>Clubhouse</b><span class="map-card-note">Show “CH” on the map.</span></button>
-          <button type="button" class="map-directory-item" data-map-category="food" data-map-target="FB" aria-pressed="false"><span class="map-card-top"><span class="map-code">FB</span><span class="map-category">Food &amp; Drink</span></span><b>Public Food &amp; Beverage Tent</b><span class="map-card-note">Show “FB” on the map.</span></button>
-          <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="PF" aria-pressed="false"><span class="map-card-top"><span class="map-code">PF</span><span class="map-category">Watch Golf</span></span><b>Practice Facility Area</b><span class="map-card-note">Show “PF” on the map.</span></button>
-          <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="P" aria-pressed="false"><span class="map-card-top"><span class="map-code">P</span><span class="map-category">Watch Golf</span></span><b>Putting Green Area</b><span class="map-card-note">Show “P” on the map.</span></button>
-          <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="SC" aria-pressed="false"><span class="map-card-top"><span class="map-code">SC</span><span class="map-category">Watch Golf</span></span><b>Leaderboards</b><span class="map-card-note">Show “SC” on the map.</span></button>
-          <button type="button" class="map-directory-item" data-map-category="amenities" data-map-target="W" aria-pressed="false"><span class="map-card-top"><span class="map-code">W</span><span class="map-category">Amenities</span></span><b>Public Washrooms</b><span class="map-card-note">Show “W” on the map.</span></button>
+          <div class="map-directory" aria-live="polite">
+            <button type="button" class="map-directory-item" data-map-category="arrival" data-map-target="A" aria-pressed="false"><span class="map-card-top"><span class="map-code">A</span><span class="map-category">Arrival</span></span><b>Public Admissions Gate</b><span class="map-card-note">Show “A” on the map.</span></button>
+            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="B" aria-pressed="false"><span class="map-card-top"><span class="map-code">B</span><span class="map-category">Watch Golf</span></span><b>Bleacher Area</b><span class="map-card-note">Show “B” on the map.</span></button>
+            <button type="button" class="map-directory-item" data-map-category="amenities" data-map-target="CH" aria-pressed="false"><span class="map-card-top"><span class="map-code">CH</span><span class="map-category">Amenities</span></span><b>Clubhouse</b><span class="map-card-note">Show “CH” on the map.</span></button>
+            <button type="button" class="map-directory-item" data-map-category="food" data-map-target="FB" aria-pressed="false"><span class="map-card-top"><span class="map-code">FB</span><span class="map-category">Food &amp; Drink</span></span><b>Public Food &amp; Beverage Tent</b><span class="map-card-note">Show “FB” on the map.</span></button>
+            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="PF" aria-pressed="false"><span class="map-card-top"><span class="map-code">PF</span><span class="map-category">Watch Golf</span></span><b>Practice Facility Area</b><span class="map-card-note">Show “PF” on the map.</span></button>
+            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="P" aria-pressed="false"><span class="map-card-top"><span class="map-code">P</span><span class="map-category">Watch Golf</span></span><b>Putting Green Area</b><span class="map-card-note">Show “P” on the map.</span></button>
+            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="SC" aria-pressed="false"><span class="map-card-top"><span class="map-code">SC</span><span class="map-category">Watch Golf</span></span><b>Leaderboards</b><span class="map-card-note">Show “SC” on the map.</span></button>
+            <button type="button" class="map-directory-item" data-map-category="amenities" data-map-target="W" aria-pressed="false"><span class="map-card-top"><span class="map-code">W</span><span class="map-category">Amenities</span></span><b>Public Washrooms</b><span class="map-card-note">Show “W” on the map.</span></button>
+          </div>
         </div>
         <dialog class="map-modal" id="map-modal" aria-labelledby="map-modal-title">
           <div class="map-modal-head"><div><span>Uplands Golf Club</span><h3 id="map-modal-title">Course map</h3></div><button type="button" id="map-zoom-close">Close</button></div>
@@ -1563,7 +1577,7 @@
           </article>
           <article class="schedule-card final-card">
             <div class="schedule-photo"><img src="https://res.cloudinary.com/pgatour-prod/pgatour/news/editorial/2025/09/22/Drew-Nesbitt.jpg" alt="Victoria Open champion Drew Nesbitt holding the trophy" loading="lazy"><time datetime="2026-09-13">Sun · Sep 13</time></div>
-            <div class="schedule-copy"><span>Round 4</span><h3>Final Round</h3><p>The lowest 72-hole total wins; ties go to a playoff.</p></div>
+            <div class="schedule-copy"><span>Round 4</span><h3>Championship Day</h3><p>The lowest 72-hole total wins; ties go to a playoff.</p></div>
           </article>
         </div>
       </div>
