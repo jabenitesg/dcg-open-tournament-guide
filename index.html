@@ -1484,6 +1484,24 @@
       .hero .quick-action { min-height: 96px; padding: 12px 13px; }
     }
 
+    @media (max-width: 759px) {
+      .map-head h2,
+      .compact-letters-head h2,
+      .champions-head h2,
+      .pathway-head h2 {
+        max-width: none;
+        white-space: nowrap;
+        font-size: clamp(1.45rem, 7.25vw, 2.3rem);
+        line-height: .95;
+        letter-spacing: -.055em;
+      }
+      .final-card .schedule-copy h3 {
+        white-space: nowrap;
+        font-size: 16px;
+        letter-spacing: -.04em;
+      }
+    }
+
     h1, h2, h3,
     .menu-panel-head strong,
     .hero-title,
@@ -1688,7 +1706,7 @@
           </article>
           <article class="schedule-card final-card">
             <div class="schedule-photo"><img src="https://res.cloudinary.com/pgatour-prod/pgatour/news/editorial/2025/09/22/Drew-Nesbitt.jpg" alt="Victoria Open champion Drew Nesbitt holding the trophy" loading="lazy"><time datetime="2026-09-13">Sun · Sep 13</time></div>
-            <div class="schedule-copy"><span>Round 4</span><h3>Championship Day</h3><p>The lowest 72-hole total wins; ties go to a playoff.</p></div>
+            <div class="schedule-copy"><span>Final Round</span><h3>Round 4 — Championship Day</h3><p>The lowest 72-hole total wins; ties go to a playoff.</p></div>
           </article>
         </div>
       </div>
