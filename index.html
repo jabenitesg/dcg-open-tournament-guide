@@ -1163,12 +1163,12 @@
       .charity-feature-content > p:not(.charity-label) { font-size: 17px; line-height: 1.65; }
       .compact-letters { padding: 68px 0; }
       .map-explorer { grid-template-columns: minmax(0,1.45fr) minmax(360px,.8fr); align-items: stretch; gap: 16px; }
-      .map-explorer .map-visual-column { height: 100%; display: grid; grid-template-rows: minmax(0,1fr) auto; }
+      .map-explorer .map-visual-column { height: 100%; }
       .map-explorer .map-frame { height: 100%; }
       .map-explorer .map-image-stage { height: 100%; min-height: 440px; aspect-ratio: auto; }
       .map-explorer .map-canvas {
         inset: auto; left: 50%; top: 50%; width: 100%; height: auto; aspect-ratio: 1800 / 814;
-        transform: translate(-53%,-50%) scale(1.27); transform-origin: center;
+        transform: translate(-53%,-50%) scale(1.33); transform-origin: center;
       }
       .map-explorer .map-directory { margin-top: 0; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
       .map-explorer .map-directory-item { min-height: 120px; padding: 13px; }
@@ -1176,7 +1176,6 @@
       .map-explorer .map-directory .map-code { width: 34px; height: 34px; flex-basis: 34px; font-size: 11px; }
       .map-explorer .map-directory b { font-size: 11px; }
       .map-explorer .map-directory .map-card-note { font-size: 9px; }
-      .map-explorer .map-actions { width: 100%; min-width: 0; }
     }
 
     /* Spectator-first refinement */
@@ -1538,7 +1537,6 @@
                 </div>
               </div>
             </div>
-            <div class="map-actions"><button class="map-action primary" id="map-zoom-open" type="button"><i class="ph ph-magnifying-glass-plus" aria-hidden="true"></i> Enlarge map</button><a class="map-action" href="https://www.google.com/maps/search/?api=1&amp;query=Uplands+Golf+Club+Victoria+BC" target="_blank" rel="noopener"><i class="ph ph-navigation-arrow" aria-hidden="true"></i> Get directions</a></div>
           </div>
           <div class="map-directory" aria-live="polite">
             <button type="button" class="map-directory-item" data-map-category="arrival" data-map-target="A" aria-pressed="false"><span class="map-card-top"><span class="map-code">A</span><span class="map-category">Arrival</span></span><b>Public Admissions Gate</b><span class="map-card-note">Show “A” on the map.</span></button>
