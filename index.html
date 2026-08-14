@@ -1054,6 +1054,8 @@
     .schedule-card { flex: 0 0 min(82vw,360px); scroll-snap-align: start; overflow: hidden; border: 1px solid rgba(23,24,58,.1); border-radius: 7px; background: white; }
     .schedule-photo { position: relative; aspect-ratio: 4/3; overflow: hidden; background: var(--forest-deep); }
     .schedule-photo img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .45s ease; }
+    .schedule-photo img.round-three-photo { object-position: 50% 58%; }
+    .schedule-photo img.round-four-photo { object-position: 50% 48%; }
     .schedule-card:hover .schedule-photo img { transform: scale(1.035); }
     .schedule-photo time { position: absolute; left: 12px; top: 12px; padding: 9px 11px; border-radius: 3px; background: var(--gold); color: var(--forest-deep); font-size: 8px; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
     .schedule-copy { min-height: 176px; padding: 22px; display: flex; flex-direction: column; }
@@ -1165,7 +1167,6 @@
     .champion-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform .45s ease; }
     .champion-card:hover { transform: translateY(-4px); background: white; }
     .champion-card:hover .champion-photo img { transform: scale(1.025); }
-    .defending-label { position: absolute; left: 0; top: 18px; padding: 9px 15px; background: var(--blue); color: white; font-size: 8px; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
     .champion-info { min-height: 178px; padding: 22px 23px 25px; }
     .champion-info > span { color: var(--blue); font-size: 8px; font-weight: 850; letter-spacing: .15em; text-transform: uppercase; }
     .champion-info h3 { margin: 7px 0 4px; color: var(--ink); font: 600 34px/.9 "Cormorant Garamond", Georgia, serif; letter-spacing: -.035em; }
@@ -1276,7 +1277,7 @@
     .schedule-tools a { min-height: 44px; padding: 0 14px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.25); border-radius: 4px; color: white; font-size: 10px; font-weight: 800; text-decoration: none; text-transform: uppercase; }
     .schedule-copy > span, .pathway-step, .champion-info > span { font-size: 10px; }
     .schedule-copy p, .pathway-card p, .champion-info p { font-size: 12px; }
-    .schedule-photo time, .defending-label, .champion-club { font-size: 10px; }
+    .schedule-photo time, .champion-club { font-size: 10px; }
     .schedule-card.current-round { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,70,194,.12); }
     .schedule-card.current-round .schedule-photo::after { content: "Today"; position: absolute; right: 12px; top: 12px; padding: 9px 11px; border-radius: 3px; background: var(--blue); color: white; font-size: 10px; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
     .schedule-card.next-round { border-color: rgba(195,165,112,.72); }
@@ -1692,11 +1693,11 @@
             <div class="schedule-copy"><span>Round 2 · The cut</span><h3>Second Round</h3><p>After 36 holes, the low 60 players and ties advance.</p></div>
           </article>
           <article class="schedule-card">
-            <div class="schedule-photo"><img src="https://static.wixstatic.com/media/3b7ba0_59985f6cdc074c608575dcdd487acda7~mv2.jpg/v1/fill/w_900,h_680,al_c,q_88/DSC00865_JPG.jpg" alt="Spectators and tournament activity at the Digital Commerce Group Open" loading="lazy"><time datetime="2026-09-12">Sat · Sep 12</time></div>
+            <div class="schedule-photo"><img class="round-three-photo" src="assets/round-3-golf-action.jpg" alt="Golfer following a tee shot during tournament play" loading="lazy"><time datetime="2026-09-12">Sat · Sep 12</time></div>
             <div class="schedule-copy"><span>Round 3</span><h3>Third Round</h3><p>The players who made the cut begin the weekend.</p></div>
           </article>
           <article class="schedule-card final-card">
-            <div class="schedule-photo"><img src="https://res.cloudinary.com/pgatour-prod/pgatour/news/editorial/2025/09/22/Drew-Nesbitt.jpg" alt="Victoria Open champion Drew Nesbitt holding the trophy" loading="lazy"><time datetime="2026-09-13">Sun · Sep 13</time></div>
+            <div class="schedule-photo"><img class="round-four-photo" src="assets/round-4-championship-day.jpg" alt="Golfer teeing off during championship play" loading="lazy"><time datetime="2026-09-13">Sun · Sep 13</time></div>
             <div class="schedule-copy"><span>Final Round</span><h3>Round 4 — Championship Day</h3><p>The lowest 72-hole total wins; ties go to a playoff.</p></div>
           </article>
         </div>
@@ -1748,7 +1749,7 @@
           <p>Meet the three most recent champions crowned at Uplands Golf Club.</p>
         </header>
         <div class="champion-grid">
-          <article class="champion-card current"><div class="champion-photo"><img src="https://static.wixstatic.com/media/3b7ba0_18a67d60502046ae80bbaf4c7539e148~mv2.png" alt="2025 champion Drew Nesbitt holding the Victoria Open trophy" loading="lazy"><span class="defending-label">Defending champion</span></div><div class="champion-info"><span>2025 champion</span><h3>Drew Nesbitt</h3><p>Toronto, ON</p><b class="champion-club">Uplands Golf Club</b></div></article>
+          <article class="champion-card current"><div class="champion-photo"><img src="https://static.wixstatic.com/media/3b7ba0_18a67d60502046ae80bbaf4c7539e148~mv2.png" alt="2025 champion Drew Nesbitt holding the Victoria Open trophy" loading="lazy"></div><div class="champion-info"><span>2025 champion</span><h3>Drew Nesbitt</h3><p>Toronto, ON</p><b class="champion-club">Uplands Golf Club</b></div></article>
           <article class="champion-card"><div class="champion-photo"><img src="https://static.wixstatic.com/media/3b7ba0_2028336e62c048b8b9a162279b9258ea~mv2.png" alt="2024 champion Frederik Kjettrup holding the Victoria Open trophy" loading="lazy"></div><div class="champion-info"><span>2024 champion</span><h3>Frederik Kjettrup</h3><p>Denmark</p><b class="champion-club">Uplands Golf Club</b></div></article>
           <article class="champion-card"><div class="champion-photo"><img src="https://static.wixstatic.com/media/3b7ba0_82e8a0df1a7146b99eaccf5dd21762f5~mv2.png" alt="2023 champion Étienne Papineau holding the Victoria Open trophy" loading="lazy"></div><div class="champion-info"><span>2023 champion</span><h3>Étienne Papineau</h3><p>Quebec City, QC</p><b class="champion-club">Uplands Golf Club</b></div></article>
         </div>
