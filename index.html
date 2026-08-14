@@ -1462,8 +1462,20 @@
     .visitor-accordion summary { font-size: 14px; }
 
     @media (max-width: 759px) {
+      .hero {
+        min-height: max(840px, 100svh);
+        padding: 138px 0 58px;
+        align-items: flex-start;
+      }
+      .hero .eyebrow { margin-bottom: 18px; }
+      .hero h1 { max-width: 340px; line-height: .82; }
       .hero-meta { font-size: 13px; line-height: 1.45; }
+      .hero-meta { margin: 28px 0 34px; gap: 11px; }
+      .hero-meta span { width: 100%; }
+      .hero .quick-actions { gap: 12px; }
+      .hero .quick-action { min-height: 140px; padding: 20px; }
       .quick-action strong { font-size: 15px; }
+      .hero-utility { margin-top: 16px; padding: 16px; gap: 11px; }
       .map-directory b { font-size: 13px; line-height: 1.25; }
     }
 
