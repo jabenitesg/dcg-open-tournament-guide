@@ -6,10 +6,11 @@
   <meta name="theme-color" content="#17183a">
   <meta name="description" content="A mobile-first 2026 Tournament Guide prototype for the Digital Commerce Group Open at Uplands Golf Club.">
   <title>2026 Tournament Guide | Digital Commerce Group Open</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Montserrat:wght@400;500;600;700;800&display=swap');
-
     :root {
       --forest: #17183a;
       --forest-deep: #0d0e26;
@@ -1390,6 +1391,25 @@
     @media (min-width: 760px) {
       .bottom-nav { display: none; }
       footer { padding-bottom: 45px; }
+    }
+
+    /* Typography legibility pass: preserve compact labels, enlarge readable copy. */
+    .schedule-tools strong { font-size: 13px; line-height: 1.55; }
+    .schedule-copy p,
+    .pathway-card p,
+    .champion-info p { font-size: 13px; line-height: 1.62; }
+    .map-key-note { font-size: 12px; line-height: 1.6; }
+    .map-arrival-alert strong,
+    .map-arrival-alert span { font-size: 12px; }
+    .map-arrival-alert span { line-height: 1.6; }
+    .map-directory .map-card-note,
+    .map-explorer .map-directory .map-card-note { font-size: 12px; line-height: 1.5; }
+    .visitor-accordion summary { font-size: 14px; }
+
+    @media (max-width: 759px) {
+      .hero-meta { font-size: 13px; line-height: 1.45; }
+      .quick-action strong { font-size: 15px; }
+      .map-directory b { font-size: 13px; line-height: 1.25; }
     }
   </style>
 </head>
