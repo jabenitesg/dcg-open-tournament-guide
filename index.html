@@ -6,11 +6,65 @@
   <meta name="theme-color" content="#17183a">
   <meta name="description" content="A mobile-first 2026 Tournament Guide prototype for the Digital Commerce Group Open at Uplands Golf Club.">
   <title>2026 Tournament Guide | Digital Commerce Group Open</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://static.wixstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css">
   <style>
+    /* Exact brand fonts already used on dcgopen.ca. */
+    @font-face {
+      font-family: "Eurostar";
+      src: url("https://static.wixstatic.com/ufonts/b9dfc5_ac4505ca94434cefad6e3a86d0138827/woff2/file.woff2") format("woff2");
+      font-display: swap;
+      font-style: normal;
+      font-weight: 100 700;
+    }
+    @font-face {
+      font-family: "Eurostar";
+      src: url("https://static.wixstatic.com/ufonts/ad0d4e_5f504d88e3da4e318725456c8c9e5b8f/woff2/file.woff2") format("woff2");
+      font-display: swap;
+      font-style: normal;
+      font-weight: 800 900;
+    }
+    @font-face {
+      font-family: "Warbler Banner";
+      src: url("https://static.wixstatic.com/ufonts/c8d4c9_1bfde4cdd4f64f029720b5fe1fdcf690/woff2/file.woff2") format("woff2");
+      font-display: swap;
+      font-style: normal;
+      font-weight: 400 600;
+    }
+    @font-face {
+      font-family: "Warbler Deck";
+      src: url("https://static.wixstatic.com/ufonts/c8d4c9_754eeeac10b149bb82e1a9165445d00f/woff2/file.woff2") format("woff2");
+      font-display: swap;
+      font-style: normal;
+      font-weight: 600 900;
+    }
+    /* Compatibility names keep the existing component rules using the new glyphs. */
+    @font-face {
+      font-family: "Montserrat";
+      src: url("https://static.wixstatic.com/ufonts/b9dfc5_ac4505ca94434cefad6e3a86d0138827/woff2/file.woff2") format("woff2");
+      font-display: swap;
+      font-weight: 100 700;
+    }
+    @font-face {
+      font-family: "Montserrat";
+      src: url("https://static.wixstatic.com/ufonts/ad0d4e_5f504d88e3da4e318725456c8c9e5b8f/woff2/file.woff2") format("woff2");
+      font-display: swap;
+      font-weight: 800 900;
+    }
+    @font-face {
+      font-family: "Cormorant Garamond";
+      src: url("https://static.wixstatic.com/ufonts/c8d4c9_1bfde4cdd4f64f029720b5fe1fdcf690/woff2/file.woff2") format("woff2");
+      font-display: swap;
+      font-style: normal;
+      font-weight: 400 600;
+    }
+    @font-face {
+      font-family: "Cormorant Garamond";
+      src: url("https://static.wixstatic.com/ufonts/c8d4c9_1bfde4cdd4f64f029720b5fe1fdcf690/woff2/file.woff2") format("woff2");
+      font-display: swap;
+      font-style: italic;
+      font-weight: 400 600;
+    }
     :root {
       --forest: #17183a;
       --forest-deep: #0d0e26;
@@ -38,7 +92,7 @@
       margin: 0;
       background: var(--paper);
       color: var(--ink);
-      font-family: "Montserrat", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: "Eurostar", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       font-size: 16px;
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
@@ -1411,6 +1465,17 @@
       .quick-action strong { font-size: 15px; }
       .map-directory b { font-size: 13px; line-height: 1.25; }
     }
+
+    h1, h2, h3,
+    .menu-panel-head strong,
+    .hero-title,
+    .section-head h2,
+    .schedule-head h2,
+    .tour-story h2,
+    .charity-feature h2,
+    .final-cta h2 { font-family: "Warbler Banner", Georgia, serif !important; }
+    .dialog-copy p,
+    .toggle-letter-copy > p:not(.letter-section-label) { font-family: "Eurostar", Arial, sans-serif; }
   </style>
 </head>
 <body>
