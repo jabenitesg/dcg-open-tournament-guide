@@ -146,6 +146,21 @@
     .menu-panel a.menu-ticket { min-height: 54px; padding: 0 18px; display: flex; align-items: center; justify-content: space-between; border: 1px solid white; border-radius: 5px; background: white; color: var(--menu-deep); font-size: 10px; font-weight: 850; letter-spacing: .1em; text-decoration: none; text-transform: uppercase; }
     .menu-ticket i { font-size: 18px; }
     .menu-location { margin: 0; color: rgba(255,255,255,.58); font-size: 9px; line-height: 1.6; letter-spacing: .06em; text-transform: uppercase; }
+    .menu-live {
+      display: none; grid-template-columns: .8fr 1.2fr; gap: 1px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,.2); border-radius: 7px; background: rgba(255,255,255,.08);
+      font-variant-numeric: tabular-nums;
+    }
+    .menu-live-time { min-width: 0; padding: 15px 16px; display: grid; align-content: center; gap: 4px; }
+    .menu-live small { color: var(--gold); font-size: 9px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .menu-live strong { color: white; font-size: 16px; letter-spacing: .01em; }
+    .menu-live .menu-weather-trigger {
+      width: 100%; min-height: 66px; padding: 11px 14px; justify-content: flex-start;
+      border: 0; border-left: 1px solid rgba(255,255,255,.18); border-radius: 0;
+    }
+    .menu-live .live-weather { min-width: 0; }
+    .menu-live .live-weather > span { display: flex; align-items: baseline; gap: 6px; }
+    .menu-live .live-weather em { max-width: 105px; color: rgba(255,255,255,.68); font-size: 10px; }
 
     .hero {
       position: relative; min-height: 760px; padding: 118px 0 38px; color: var(--white); overflow: hidden;
@@ -1344,7 +1359,14 @@
 
     @media (max-width: 380px) {
       .brand-logo { width: 136px; }
-      .live-time { display: none; }
+      .menu-live { grid-template-columns: .72fr 1.28fr; }
+      .menu-live-time { padding-inline: 12px; }
+      .menu-live .menu-weather-trigger { padding-inline: 10px; }
+    }
+
+    @media (max-width: 979px) {
+      .topbar-live { display: none; }
+      .menu-live { display: grid; }
     }
 
     /* The persistent action bar is useful on-course, but only at phone size. */
@@ -1363,10 +1385,10 @@
         <img class="brand-logo" src="assets/PGA_Americas_White_Logo.svg" alt="" aria-hidden="true">
       </a>
       <div class="topbar-live" aria-label="Current time and weather at Uplands Golf Club">
-        <span class="live-time"><small>Victoria</small><strong id="nav-time">--:--</strong></span>
-        <button class="weather-trigger" id="weather-trigger" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="weather-popover">
-          <i class="nav-weather-icon ph ph-cloud" id="nav-weather-icon" aria-hidden="true"></i>
-          <span class="live-weather"><small id="nav-weather-context">Victoria now</small><span><strong id="nav-weather-temp">--°</strong><em id="nav-weather-condition">Loading</em></span></span>
+        <span class="live-time"><small>Victoria</small><strong id="nav-time" data-victoria-time>--:--</strong></span>
+        <button class="weather-trigger" id="weather-trigger" data-weather-trigger type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="weather-popover">
+          <i class="nav-weather-icon ph ph-cloud" id="nav-weather-icon" data-weather-icon aria-hidden="true"></i>
+          <span class="live-weather"><small id="nav-weather-context" data-weather-context>Victoria now</small><span><strong id="nav-weather-temp" data-weather-temp>--°</strong><em id="nav-weather-condition" data-weather-condition>Loading</em></span></span>
         </button>
       </div>
       <nav class="desktop-nav" aria-label="Primary navigation">
@@ -1393,7 +1415,17 @@
         <a href="#champions">Tour &amp; winners <span>05</span></a>
         <a href="#charity">Easter Seals <span>06</span></a>
       </div>
-      <div class="menu-footer"><a class="menu-ticket" href="https://www.eventbrite.ca/e/the-digital-commerce-group-open-tickets-1982394960692" target="_blank" rel="noopener">Get tickets <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a><p class="menu-location">September 10–13, 2026<br>Uplands Golf Club · Victoria, BC</p></div>
+      <div class="menu-footer">
+        <div class="menu-live" aria-label="Current time and weather at Uplands Golf Club">
+          <span class="menu-live-time"><small>Victoria time</small><strong data-victoria-time>--:--</strong></span>
+          <button class="weather-trigger menu-weather-trigger" data-weather-trigger type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="weather-popover">
+            <i class="nav-weather-icon ph ph-cloud" data-weather-icon aria-hidden="true"></i>
+            <span class="live-weather"><small data-weather-context>Victoria now</small><span><strong data-weather-temp>--°</strong><em data-weather-condition>Loading</em></span></span>
+          </button>
+        </div>
+        <a class="menu-ticket" href="https://www.eventbrite.ca/e/the-digital-commerce-group-open-tickets-1982394960692" target="_blank" rel="noopener">Get tickets <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
+        <p class="menu-location">September 10–13, 2026<br>Uplands Golf Club · Victoria, BC</p>
+      </div>
     </div>
   </nav>
 
@@ -1762,28 +1794,33 @@
     const weatherDescriptions = { 0: 'Clear', 1: 'Mainly clear', 2: 'Partly cloudy', 3: 'Overcast', 45: 'Fog', 48: 'Fog', 51: 'Light drizzle', 53: 'Drizzle', 55: 'Heavy drizzle', 56: 'Freezing drizzle', 57: 'Freezing drizzle', 61: 'Light rain', 63: 'Rain', 65: 'Heavy rain', 66: 'Freezing rain', 67: 'Freezing rain', 71: 'Light snow', 73: 'Snow', 75: 'Heavy snow', 77: 'Snow', 80: 'Rain showers', 81: 'Rain showers', 82: 'Heavy showers', 85: 'Snow showers', 86: 'Snow showers', 95: 'Thunderstorm', 96: 'Storm with hail', 99: 'Storm with hail' };
     const weatherIcons = { 0: 'ph-sun', 1: 'ph-sun-dim', 2: 'ph-cloud-sun', 3: 'ph-cloud', 45: 'ph-cloud-fog', 48: 'ph-cloud-fog', 51: 'ph-cloud-rain', 53: 'ph-cloud-rain', 55: 'ph-cloud-rain', 56: 'ph-cloud-rain', 57: 'ph-cloud-rain', 61: 'ph-cloud-rain', 63: 'ph-cloud-rain', 65: 'ph-cloud-rain', 66: 'ph-cloud-rain', 67: 'ph-cloud-rain', 71: 'ph-snowflake', 73: 'ph-snowflake', 75: 'ph-snowflake', 77: 'ph-snowflake', 80: 'ph-cloud-rain', 81: 'ph-cloud-rain', 82: 'ph-cloud-rain', 85: 'ph-cloud-snow', 86: 'ph-cloud-snow', 95: 'ph-cloud-lightning', 96: 'ph-cloud-lightning', 99: 'ph-cloud-lightning' };
 
-    const weatherTrigger = document.getElementById('weather-trigger');
+    const weatherTriggers = [...document.querySelectorAll('[data-weather-trigger]')];
+    let activeWeatherTrigger = weatherTriggers.find(trigger => trigger.offsetParent !== null) || weatherTriggers[0];
     const weatherPopover = document.getElementById('weather-popover');
     const weatherClose = document.getElementById('weather-close');
     const weatherPageRegions = [...document.querySelectorAll('main, footer, .bottom-nav, .brand, .desktop-nav, .menu-button')];
     const eventForecastStart = new Date('2026-09-04T00:00:00-07:00');
     const eventForecastEnd = new Date('2026-09-13T23:59:59-07:00');
     const inTournamentForecastWindow = new Date() >= eventForecastStart && new Date() <= eventForecastEnd;
-    document.getElementById('nav-weather-context').textContent = inTournamentForecastWindow ? 'Tournament weather' : 'Victoria now';
+    document.querySelectorAll('[data-weather-context]').forEach(item => { item.textContent = inTournamentForecastWindow ? 'Tournament weather' : 'Victoria now'; });
     document.getElementById('weather-popover-kicker').textContent = inTournamentForecastWindow ? 'Tournament forecast · Uplands Golf Club' : 'Live conditions · Uplands Golf Club';
     document.getElementById('weather-popover-title').textContent = inTournamentForecastWindow ? 'Weather for tournament week' : 'Victoria 7-day forecast';
     function setWeatherPopover(open) {
       if (open && menu?.classList.contains('open')) setMenuOpen(false, false);
       weatherPopover.hidden = !open;
-      weatherTrigger.setAttribute('aria-expanded', String(open));
+      weatherTriggers.forEach(trigger => trigger.setAttribute('aria-expanded', String(open)));
       weatherPageRegions.forEach(region => { region.inert = open; });
       if (open) requestAnimationFrame(() => weatherClose.focus());
-      else weatherTrigger.focus({ preventScroll: true });
+      else if (activeWeatherTrigger?.offsetParent !== null) activeWeatherTrigger.focus({ preventScroll: true });
+      else menuButton?.focus({ preventScroll: true });
     }
-    weatherTrigger.addEventListener('click', () => setWeatherPopover(weatherPopover.hidden));
+    weatherTriggers.forEach(trigger => trigger.addEventListener('click', () => {
+      activeWeatherTrigger = trigger;
+      setWeatherPopover(weatherPopover.hidden);
+    }));
     weatherClose.addEventListener('click', () => setWeatherPopover(false));
     document.addEventListener('click', event => {
-      if (!weatherPopover.hidden && !weatherPopover.contains(event.target) && !weatherTrigger.contains(event.target)) setWeatherPopover(false);
+      if (!weatherPopover.hidden && !weatherPopover.contains(event.target) && !weatherTriggers.some(trigger => trigger.contains(event.target))) setWeatherPopover(false);
     });
     document.addEventListener('keydown', event => {
       if (event.key === 'Escape' && !weatherPopover.hidden) setWeatherPopover(false);
@@ -1791,8 +1828,8 @@
     });
 
     function updateVictoriaTime() {
-      const clock = document.getElementById('nav-time');
-      if (clock) clock.textContent = new Intl.DateTimeFormat('en-CA', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Vancouver' }).format(new Date());
+      const time = new Intl.DateTimeFormat('en-CA', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Vancouver' }).format(new Date());
+      document.querySelectorAll('[data-victoria-time]').forEach(clock => { clock.textContent = time; });
     }
     updateVictoriaTime();
     setInterval(updateVictoriaTime, 60000);
@@ -1806,9 +1843,9 @@
         const current = data.current;
         const condition = weatherDescriptions[current.weather_code] || 'Current conditions';
         const icon = weatherIcons[current.weather_code] || 'ph-cloud';
-        document.getElementById('nav-weather-temp').textContent = Math.round(current.temperature_2m) + '°';
-        document.getElementById('nav-weather-condition').textContent = condition;
-        document.getElementById('nav-weather-icon').className = 'nav-weather-icon ph ' + icon;
+        document.querySelectorAll('[data-weather-temp]').forEach(item => { item.textContent = Math.round(current.temperature_2m) + '°'; });
+        document.querySelectorAll('[data-weather-condition]').forEach(item => { item.textContent = condition; });
+        document.querySelectorAll('[data-weather-icon]').forEach(item => { item.className = 'nav-weather-icon ph ' + icon; });
         document.getElementById('weather-current-icon').className = 'weather-current-icon ph ' + icon;
         document.getElementById('weather-current-summary').textContent = Math.round(current.temperature_2m) + '° · ' + condition;
         document.getElementById('weather-current-detail').textContent = 'Feels like ' + Math.round(current.apparent_temperature) + '° · Wind ' + Math.round(current.wind_speed_10m) + ' km/h';
@@ -1825,9 +1862,9 @@
         const updated = new Intl.DateTimeFormat('en-CA', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Vancouver', timeZoneName: 'short' }).format(new Date());
         document.getElementById('weather-updated').textContent = 'Updated ' + updated + ' · Data by Open-Meteo';
       } catch (error) {
-        document.getElementById('nav-weather-temp').textContent = '--°';
-        document.getElementById('nav-weather-condition').textContent = 'Unavailable';
-        document.getElementById('nav-weather-icon').className = 'nav-weather-icon ph ph-cloud-slash';
+        document.querySelectorAll('[data-weather-temp]').forEach(item => { item.textContent = '--°'; });
+        document.querySelectorAll('[data-weather-condition]').forEach(item => { item.textContent = 'Unavailable'; });
+        document.querySelectorAll('[data-weather-icon]').forEach(item => { item.className = 'nav-weather-icon ph ph-cloud-slash'; });
         document.getElementById('weather-current-icon').className = 'weather-current-icon ph ph-cloud-slash';
         document.getElementById('weather-current-summary').textContent = 'Weather unavailable';
         document.getElementById('weather-current-detail').textContent = 'Reload the guide when connected.';
