@@ -1278,8 +1278,10 @@
     .schedule-copy > span, .pathway-step, .champion-info > span { font-size: 10px; }
     .schedule-copy p, .pathway-card p, .champion-info p { font-size: 12px; }
     .schedule-photo time, .champion-club { font-size: 10px; }
-    .schedule-card.current-round { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,70,194,.12); }
-    .schedule-card.current-round .schedule-photo::after { content: "Today"; position: absolute; right: 12px; top: 12px; padding: 9px 11px; border-radius: 3px; background: var(--blue); color: white; font-size: 10px; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+    .schedule-card.current-round { position: relative; border: 2px solid var(--blue); box-shadow: 0 18px 42px rgba(46,96,222,.22), inset 0 -5px 0 var(--gold); }
+    .schedule-card.current-round .schedule-photo::after { content: "Today"; position: absolute; right: 12px; top: 12px; padding: 9px 11px; border-radius: 3px; background: var(--blue); color: white; box-shadow: 0 8px 20px rgba(14,14,49,.24); font-size: 10px; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+    .schedule-card.current-round .schedule-copy { background: linear-gradient(145deg, #fff 62%, rgba(46,96,222,.09)); }
+    .schedule-card.current-round .schedule-copy h3 { color: var(--blue); }
     .schedule-card.next-round { border-color: rgba(195,165,112,.72); }
     .visitor-accordion summary { min-height: 62px; font-size: 13px; }
     .visitor-accordion details p { font-size: 14px; }
@@ -1828,14 +1830,28 @@
     const scheduleCards = [...document.querySelectorAll('.schedule-card')];
     const victoriaToday = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Vancouver', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
     let upcomingRoundMarked = false;
+    let currentRoundCard = null;
     scheduleCards.forEach(card => {
       const roundDate = card.querySelector('time')?.getAttribute('datetime');
-      if (roundDate === victoriaToday) card.classList.add('current-round');
+      if (roundDate === victoriaToday) {
+        card.classList.add('current-round');
+        card.setAttribute('aria-current', 'date');
+        currentRoundCard = card;
+      }
       else if (!upcomingRoundMarked && roundDate > victoriaToday) {
         card.classList.add('next-round');
         upcomingRoundMarked = true;
       }
     });
+    if (currentRoundCard) {
+      const scheduleGrid = currentRoundCard.closest('.schedule-grid');
+      requestAnimationFrame(() => {
+        if (scheduleGrid.scrollWidth > scheduleGrid.clientWidth) {
+          const centredPosition = currentRoundCard.offsetLeft - scheduleGrid.offsetLeft - (scheduleGrid.clientWidth - currentRoundCard.offsetWidth) / 2;
+          scheduleGrid.scrollTo({ left: Math.max(0, centredPosition), behavior: 'auto' });
+        }
+      });
+    }
 
     const menuButton = document.querySelector('.menu-button');
     const menu = document.querySelector('.menu-panel');
