@@ -1111,7 +1111,6 @@
     .map-directory .map-code { width: 39px; height: 39px; flex: 0 0 39px; display: grid; place-items: center; border-radius: 50%; background: linear-gradient(135deg,#0E0E31,#2E60DE); color: white; font-size: 12px; font-weight: 850; letter-spacing: -.02em; }
     .map-directory .map-category { color: var(--blue); font-size: 7px; font-weight: 850; letter-spacing: .1em; text-align: right; text-transform: uppercase; }
     .map-directory b { margin-top: auto; font-size: 12px; line-height: 1.2; text-transform: uppercase; }
-    .map-directory .map-card-note { margin: 5px 0 0; color: var(--muted); font-size: 9px; line-height: 1.4; }
     .map-explorer { display: grid; gap: 12px; }
     .map-visual-column { min-width: 0; }
 
@@ -1227,7 +1226,6 @@
       .map-explorer .map-card-top { margin-bottom: 14px; }
       .map-explorer .map-directory .map-code { width: 34px; height: 34px; flex-basis: 34px; font-size: 11px; }
       .map-explorer .map-directory b { font-size: 11px; }
-      .map-explorer .map-directory .map-card-note { font-size: 9px; }
     }
 
     /* Spectator-first refinement */
@@ -1261,7 +1259,6 @@
     .map-filter-bar button, .map-action { font-size: 10px; }
     .map-action { gap: 7px; font-family: inherit; cursor: pointer; }
     .map-category { font-size: 9px !important; }
-    .map-directory .map-card-note { font-size: 11px; }
     .map-pointer::after { animation-iteration-count: 2; }
     .map-modal { width: min(1120px,calc(100% - 20px)); max-height: calc(100dvh - 20px); padding: 18px; border: 1px solid rgba(195,165,112,.5); border-radius: 10px; background: var(--cream); color: var(--ink); box-shadow: 0 34px 90px rgba(4,5,20,.5); }
     .map-modal::backdrop { background: rgba(4,5,20,.78); backdrop-filter: blur(5px); }
@@ -1453,8 +1450,6 @@
     .map-arrival-alert strong,
     .map-arrival-alert span { font-size: 12px; }
     .map-arrival-alert span { line-height: 1.6; }
-    .map-directory .map-card-note,
-    .map-explorer .map-directory .map-card-note { font-size: 12px; line-height: 1.5; }
     .visitor-accordion summary { font-size: 14px; }
 
     @media (max-width: 759px) {
@@ -1688,14 +1683,14 @@
             </div>
           </div>
           <div class="map-directory" aria-live="polite">
-            <button type="button" class="map-directory-item" data-map-category="arrival" data-map-target="A" aria-pressed="false"><span class="map-card-top"><span class="map-code">A</span><span class="map-category">Arrival</span></span><b>Public Admissions Gate</b><span class="map-card-note">Show “A” on the map.</span></button>
-            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="B" aria-pressed="false"><span class="map-card-top"><span class="map-code">B</span><span class="map-category">Watch Golf</span></span><b>Bleacher Area</b><span class="map-card-note">Show “B” on the map.</span></button>
-            <button type="button" class="map-directory-item" data-map-category="amenities" data-map-target="CH" aria-pressed="false"><span class="map-card-top"><span class="map-code">CH</span><span class="map-category">Amenities</span></span><b>Clubhouse</b><span class="map-card-note">Show “CH” on the map.</span></button>
-            <button type="button" class="map-directory-item" data-map-category="food" data-map-target="FB" aria-pressed="false"><span class="map-card-top"><span class="map-code">FB</span><span class="map-category">Food &amp; Drink</span></span><b>Public Food &amp; Beverage Tent</b><span class="map-card-note">Show “FB” on the map.</span></button>
-            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="PF" aria-pressed="false"><span class="map-card-top"><span class="map-code">PF</span><span class="map-category">Watch Golf</span></span><b>Practice Facility Area</b><span class="map-card-note">Show “PF” on the map.</span></button>
-            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="P" aria-pressed="false"><span class="map-card-top"><span class="map-code">P</span><span class="map-category">Watch Golf</span></span><b>Putting Green Area</b><span class="map-card-note">Show “P” on the map.</span></button>
-            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="SC" aria-pressed="false"><span class="map-card-top"><span class="map-code">SC</span><span class="map-category">Watch Golf</span></span><b>Leaderboards</b><span class="map-card-note">Show “SC” on the map.</span></button>
-            <button type="button" class="map-directory-item" data-map-category="amenities" data-map-target="W" aria-pressed="false"><span class="map-card-top"><span class="map-code">W</span><span class="map-category">Amenities</span></span><b>Public Washrooms</b><span class="map-card-note">Show “W” on the map.</span></button>
+            <button type="button" class="map-directory-item" data-map-category="arrival" data-map-target="A" aria-pressed="false"><span class="map-card-top"><span class="map-code">A</span><span class="map-category">Arrival</span></span><b>Public Admissions Gate</b></button>
+            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="B" aria-pressed="false"><span class="map-card-top"><span class="map-code">B</span><span class="map-category">Watch Golf</span></span><b>Bleacher Area</b></button>
+            <button type="button" class="map-directory-item" data-map-category="amenities" data-map-target="CH" aria-pressed="false"><span class="map-card-top"><span class="map-code">CH</span><span class="map-category">Amenities</span></span><b>Clubhouse</b></button>
+            <button type="button" class="map-directory-item" data-map-category="food" data-map-target="FB" aria-pressed="false"><span class="map-card-top"><span class="map-code">FB</span><span class="map-category">Food &amp; Drink</span></span><b>Public Food &amp; Beverage Tent</b></button>
+            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="PF" aria-pressed="false"><span class="map-card-top"><span class="map-code">PF</span><span class="map-category">Watch Golf</span></span><b>Practice Facility Area</b></button>
+            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="P" aria-pressed="false"><span class="map-card-top"><span class="map-code">P</span><span class="map-category">Watch Golf</span></span><b>Putting Green Area</b></button>
+            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="SC" aria-pressed="false"><span class="map-card-top"><span class="map-code">SC</span><span class="map-category">Watch Golf</span></span><b>Leaderboards</b></button>
+            <button type="button" class="map-directory-item" data-map-category="amenities" data-map-target="W" aria-pressed="false"><span class="map-card-top"><span class="map-code">W</span><span class="map-category">Amenities</span></span><b>Public Washrooms</b></button>
           </div>
         </div>
         <dialog class="map-modal" id="map-modal" aria-labelledby="map-modal-title">
