@@ -1116,15 +1116,25 @@
     .map-explorer { display: grid; gap: 12px; }
     .map-visual-column { min-width: 0; }
 
-    .essentials-band { padding: 74px 0; background: var(--cream); color: var(--ink); }
+    .essentials-band {
+      padding: 74px 0;
+      background: linear-gradient(112deg, #0E0E31 0%, #193579 56%, #2E60DE 100%);
+      color: white;
+    }
     .essential-grid { display: grid; gap: 8px; }
     .essential-grid article { min-height: 150px; padding: 18px; border: 1px solid rgba(255,255,255,.13); border-radius: 6px; background: rgba(255,255,255,.06); }
     .essential-grid b { color: var(--gold); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; }
     .essential-grid p { margin: 22px 0 0; color: rgba(255,255,255,.72); font-size: 11px; line-height: 1.55; }
     .pending-line { margin: 18px 0 0; color: rgba(255,255,255,.52); font-size: 9px; line-height: 1.55; }
     .pending-line span { color: white; font-weight: 800; }
-    .essentials-band .section-head p { color: var(--muted); }
-    .visitor-accordion { max-width: 920px; border-top: 1px solid var(--line); }
+    .essentials-band .section-number { color: var(--gold); }
+    .essentials-band .section-head h2 { color: white; }
+    .essentials-band .section-head p { color: rgba(255,255,255,.76); }
+    .visitor-accordion {
+      max-width: 960px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 30px);
+      border: 1px solid rgba(255,255,255,.38); border-radius: 10px;
+      background: rgba(255,255,255,.98); box-shadow: 0 24px 60px rgba(6,10,38,.22);
+    }
     .visitor-accordion details { border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; }
     .visitor-accordion summary { padding: 22px 2px; color: var(--ink); font-size: 12px; letter-spacing: .02em; text-transform: uppercase; }
     .visitor-accordion summary::after { background: white; color: var(--blue); }
@@ -1783,13 +1793,6 @@
   </nav>
 
   <script>
-    const scheduleSection = document.getElementById('today');
-    const mapSection = document.getElementById('course-map');
-    const welcomeSection = document.getElementById('welcome');
-    if (scheduleSection && mapSection && welcomeSection) {
-      mapSection.before(scheduleSection);
-      mapSection.after(welcomeSection);
-    }
     const scheduleCards = [...document.querySelectorAll('.schedule-card')];
     const victoriaToday = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Vancouver', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
     let upcomingRoundMarked = false;
