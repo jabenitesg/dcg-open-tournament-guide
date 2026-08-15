@@ -1792,6 +1792,10 @@
   </nav>
 
   <script>
+    const scheduleSection = document.getElementById('today');
+    const mapSection = document.getElementById('course-map');
+    if (scheduleSection && mapSection) mapSection.before(scheduleSection);
+
     const scheduleCards = [...document.querySelectorAll('.schedule-card')];
     const victoriaToday = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Vancouver', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
     let upcomingRoundMarked = false;
