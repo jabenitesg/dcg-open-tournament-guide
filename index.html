@@ -1103,14 +1103,14 @@
     .map-action.primary { background: var(--blue); color: white; }
     .map-action:hover { transform: translateY(-2px); }
     .map-directory { margin-top: 12px; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
-    .map-directory-item { min-height: 150px; padding: 16px; display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 6px; background: white; color: var(--ink); font-family: inherit; text-align: left; cursor: pointer; transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+    .map-directory-item { min-height: 96px; padding: 14px; display: grid; grid-template-columns: auto minmax(0,1fr); align-items: center; gap: 13px; border: 1px solid var(--line); border-radius: 6px; background: white; color: var(--ink); font-family: inherit; text-align: left; cursor: pointer; transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
     .map-directory-item:hover, .map-directory-item:focus-visible { transform: translateY(-3px); border-color: rgba(46,96,222,.4); box-shadow: 0 12px 25px rgba(14,14,49,.08); outline: none; }
     .map-directory-item.active { border-color: var(--blue); box-shadow: inset 0 -4px 0 var(--blue), 0 12px 25px rgba(14,14,49,.08); }
     .map-directory-item[hidden] { display: none; }
-    .map-card-top { margin-bottom: 22px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
     .map-directory .map-code { width: 39px; height: 39px; flex: 0 0 39px; display: grid; place-items: center; border-radius: 50%; background: linear-gradient(135deg,#0E0E31,#2E60DE); color: white; font-size: 12px; font-weight: 850; letter-spacing: -.02em; }
-    .map-directory .map-category { color: var(--blue); font-size: 7px; font-weight: 850; letter-spacing: .1em; text-align: right; text-transform: uppercase; }
-    .map-directory b { margin-top: auto; font-size: 12px; line-height: 1.2; text-transform: uppercase; }
+    .map-card-copy { min-width: 0; display: grid; gap: 7px; }
+    .map-directory .map-category { color: var(--blue); font-size: 7px; font-weight: 850; letter-spacing: .1em; text-align: left; text-transform: uppercase; }
+    .map-directory b { margin: 0; font-size: 12px; line-height: 1.2; text-transform: uppercase; }
     .map-explorer { display: grid; gap: 12px; }
     .map-visual-column { min-width: 0; }
 
@@ -1222,8 +1222,7 @@
         transform: translate(-53%,-50%) scale(1.33); transform-origin: center;
       }
       .map-explorer .map-directory { margin-top: 0; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
-      .map-explorer .map-directory-item { min-height: 120px; padding: 13px; }
-      .map-explorer .map-card-top { margin-bottom: 14px; }
+      .map-explorer .map-directory-item { min-height: 96px; padding: 13px; }
       .map-explorer .map-directory .map-code { width: 34px; height: 34px; flex-basis: 34px; font-size: 11px; }
       .map-explorer .map-directory b { font-size: 11px; }
     }
@@ -1685,14 +1684,14 @@
             </div>
           </div>
           <div class="map-directory" aria-live="polite">
-            <button type="button" class="map-directory-item" data-map-category="arrival" data-map-target="A" aria-pressed="false"><span class="map-card-top"><span class="map-code">A</span><span class="map-category">Arrival</span></span><b>Public Admissions Gate</b></button>
-            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="B" aria-pressed="false"><span class="map-card-top"><span class="map-code">B</span><span class="map-category">Watch Golf</span></span><b>Bleacher Area</b></button>
-            <button type="button" class="map-directory-item" data-map-category="amenities" data-map-target="CH" aria-pressed="false"><span class="map-card-top"><span class="map-code">CH</span><span class="map-category">Amenities</span></span><b>Clubhouse</b></button>
-            <button type="button" class="map-directory-item" data-map-category="food" data-map-target="FB" aria-pressed="false"><span class="map-card-top"><span class="map-code">FB</span><span class="map-category">Food &amp; Drink</span></span><b>Public Food &amp; Beverage Tent</b></button>
-            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="PF" aria-pressed="false"><span class="map-card-top"><span class="map-code">PF</span><span class="map-category">Watch Golf</span></span><b>Practice Facility Area</b></button>
-            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="P" aria-pressed="false"><span class="map-card-top"><span class="map-code">P</span><span class="map-category">Watch Golf</span></span><b>Putting Green Area</b></button>
-            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="SC" aria-pressed="false"><span class="map-card-top"><span class="map-code">SC</span><span class="map-category">Watch Golf</span></span><b>Leaderboards</b></button>
-            <button type="button" class="map-directory-item" data-map-category="amenities" data-map-target="W" aria-pressed="false"><span class="map-card-top"><span class="map-code">W</span><span class="map-category">Amenities</span></span><b>Public Washrooms</b></button>
+            <button type="button" class="map-directory-item" data-map-category="arrival" data-map-target="A" aria-pressed="false"><span class="map-code">A</span><span class="map-card-copy"><span class="map-category">Arrival</span><b>Public Admissions Gate</b></span></button>
+            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="B" aria-pressed="false"><span class="map-code">B</span><span class="map-card-copy"><span class="map-category">Watch Golf</span><b>Bleacher Area</b></span></button>
+            <button type="button" class="map-directory-item" data-map-category="amenities" data-map-target="CH" aria-pressed="false"><span class="map-code">CH</span><span class="map-card-copy"><span class="map-category">Amenities</span><b>Clubhouse</b></span></button>
+            <button type="button" class="map-directory-item" data-map-category="food" data-map-target="FB" aria-pressed="false"><span class="map-code">FB</span><span class="map-card-copy"><span class="map-category">Food &amp; Drink</span><b>Public Food &amp; Beverage Tent</b></span></button>
+            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="PF" aria-pressed="false"><span class="map-code">PF</span><span class="map-card-copy"><span class="map-category">Watch Golf</span><b>Practice Facility Area</b></span></button>
+            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="P" aria-pressed="false"><span class="map-code">P</span><span class="map-card-copy"><span class="map-category">Watch Golf</span><b>Putting Green Area</b></span></button>
+            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="SC" aria-pressed="false"><span class="map-code">SC</span><span class="map-card-copy"><span class="map-category">Watch Golf</span><b>Leaderboards</b></span></button>
+            <button type="button" class="map-directory-item" data-map-category="amenities" data-map-target="W" aria-pressed="false"><span class="map-code">W</span><span class="map-card-copy"><span class="map-category">Amenities</span><b>Public Washrooms</b></span></button>
           </div>
         </div>
         <dialog class="map-modal" id="map-modal" aria-labelledby="map-modal-title">
