@@ -1481,7 +1481,8 @@
 
     /* Phone quick actions: keep the four essentials visible without crowding the hero. */
     @media (max-width: 520px) {
-      .hero .quick-actions { gap: 10px; margin-inline: 4px; }
+      .hero-inner { width: calc(100% - 40px); }
+      .hero .quick-actions { gap: 12px; margin-inline: 0; }
       .hero .quick-action {
         min-height: 80px; padding: 14px 15px; flex-direction: row; align-items: center;
         justify-content: flex-start; gap: 10px; border-radius: 8px;
@@ -1490,7 +1491,7 @@
       .hero .quick-action-top { order: 2; margin-left: auto; }
       .hero .quick-action .arrow { font-size: 18px; }
       .hero .quick-action .status { display: none; }
-      .hero-utility { margin-inline: 4px; }
+      .hero-utility { margin-inline: 0; }
     }
 
     @media (max-width: 759px) {
