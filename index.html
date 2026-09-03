@@ -1246,7 +1246,8 @@
     .menu-panel-head span, .menu-panel .menu-links a > span { font-size: 9px; }
     .menu-location { font-size: 10px; }
     .status { font-size: 10px; letter-spacing: .08em; }
-    .letter-toggle-buttons { grid-template-columns: repeat(3,minmax(0,1fr)); }
+    .letter-toggle-buttons { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    .letter-toggle-buttons button:last-child:nth-child(odd) { grid-column: 1 / -1; }
     .letter-toggle-buttons button { min-height: 132px; }
     .letter-toggle-buttons button b { font-size: 12px; }
     .letter-toggle-buttons button small { font-size: 10px; }
@@ -1259,6 +1260,9 @@
     .organization-wordmark strong { color: var(--gold); font-size: 27px; }
     .organization-wordmark img { width: 100%; height: auto; aspect-ratio: auto; padding: 0; object-fit: contain; background: transparent; }
     .gain-author .gain-tagline { display: block; margin: 13px 0 0; color: var(--ink); font: italic 500 20px/1.1 "Cormorant Garamond", Georgia, serif; }
+    .tc-wordmark { gap: 0; border-color: rgba(23,24,58,.18); background: white; color: var(--ink); font-family: Georgia, serif; text-transform: none; }
+    .tc-wordmark span { font-size: 21px; line-height: .9; letter-spacing: -.04em; }
+    .tc-wordmark strong { color: var(--ink); font-size: 35px; line-height: .9; letter-spacing: -.055em; }
     .map-filter-bar button, .map-action { font-size: 10px; }
     .map-action { gap: 7px; font-family: inherit; cursor: pointer; }
     .map-category { font-size: 9px !important; }
@@ -1301,13 +1305,15 @@
       .hero { min-height: 760px; }
       .hero .quick-actions { grid-template-columns: repeat(4,minmax(0,1fr)); }
       .hero-utility { grid-template-columns: repeat(3,1fr); }
-      .letter-toggle-buttons { grid-template-columns: repeat(3,1fr); }
+      .letter-toggle-buttons { grid-template-columns: repeat(2,1fr); }
       .schedule-tools { grid-template-columns: minmax(0,1fr) auto auto; align-items: center; }
     }
 
     @media (min-width: 980px) {
       .hero { min-height: 820px; }
       .hero .quick-action { min-height: 140px; }
+      .letter-toggle-buttons { grid-template-columns: repeat(5,minmax(0,1fr)); }
+      .letter-toggle-buttons button:last-child:nth-child(odd) { grid-column: auto; }
     }
 
     /* DCG gradient navigation system */
@@ -1652,6 +1658,7 @@
           <button type="button" data-letter-toggle="letter-pga" aria-expanded="false" aria-controls="letter-pga"><span>02</span><b>PGA TOUR Americas</b><small>Alex Baldwin</small><i aria-hidden="true">+</i></button>
           <button type="button" data-letter-toggle="letter-dcg" aria-expanded="false" aria-controls="letter-dcg"><span>03</span><b>Main Sponsor</b><small>Digital Commerce Group</small><i aria-hidden="true">+</i></button>
           <button type="button" data-letter-toggle="letter-gain" aria-expanded="false" aria-controls="letter-gain"><span>04</span><b>Pro-Am Sponsor</b><small>GAIN Group</small><i aria-hidden="true">+</i></button>
+          <button type="button" data-letter-toggle="letter-times-colonist" aria-expanded="false" aria-controls="letter-times-colonist"><span>05</span><b>Proud Sponsor</b><small>Times Colonist</small><i aria-hidden="true">+</i></button>
         </div>
 
         <div class="letter-toggle-panels">
@@ -1673,6 +1680,11 @@
           <article class="letter-toggle-panel" id="letter-gain" hidden>
             <div class="toggle-letter-copy"><p class="letter-section-label">Official Pro-Am Sponsor</p><h3>A welcome from GAIN Group</h3><p>On behalf of the entire GAIN Group family, we are delighted to welcome you to this year’s Victoria Open and proud to once again be the official sponsor of the Pro-Am.</p><p>The Victoria Open is more than a celebration of exceptional golf. It is an opportunity to come together, connect, and celebrate the people and organizations that make our community so special. We are proud to be part of an event that brings such energy, generosity, and spirit to Vancouver Island.</p><p>Giving back is at the heart of who we are at GAIN Group. From supporting local charities and youth initiatives to championing the arts, sport, and the many events that bring our community together, we believe in creating experiences that have a lasting impact. We are especially proud to support Easter Seals BC &amp; Yukon and the important work they do to create greater opportunities and brighter futures for children and families.</p><p>We hope you enjoy the competition, the camaraderie, and all the moments that make the Victoria Open such a memorable part of our summer. Thank you for being here, for supporting this wonderful event, and for helping make our community stronger.</p><p>Warm regards,</p></div>
             <aside class="toggle-author organization-author gain-author"><img src="assets/gain-group-logo.png" alt="GAIN Group" loading="lazy"><span class="gain-tagline">Experience Extraordinary</span><h4>Peter Trzewik</h4><p>COO, GAIN Group of Companies</p></aside>
+          </article>
+
+          <article class="letter-toggle-panel" id="letter-times-colonist" hidden>
+            <div class="toggle-letter-copy"><p class="letter-section-label">Proud Sponsor</p><h3>A welcome from Times Colonist</h3><p>The Digital Commerce Group Open is one of the most important events on Vancouver Island’s sports calendar this year, and the Times Colonist is proud to once again be part of the tournament.</p><p>We have supported the tournament every year since it began in 1981, and we will continue to support it for many years to come. Events such as this are vital to our community, because they add to the richness of life here.</p><p>The golf tournament gives you a chance to see some of the finest young golfers in the world on a course in your back yard. Many of you have played Uplands, and many of you will know exactly how you would play the course – if only you were as skilled as the golfers who are working hard for their shot at the PGA Tour itself.</p><p>The Digital Commerce Group Open draws support for several dozen local companies, all determined to ensure that the PGA Tour Americas tournament is a big success. Make a note of the names of those sponsors and consider supporting them the way that they support the community.</p><p>That’s for later. Right now, enjoy the Pro-Am, if you are playing in it. Take in the experience at Uplands. Take the once-a-year chance to see some of the finest golfers in the Americas.</p><p>Welcome to all of you!</p></div>
+            <aside class="toggle-author"><div class="organization-wordmark tc-wordmark" role="img" aria-label="Times Colonist"><span>Times</span><strong>Colonist</strong></div><h4>Dave Obee</h4><p>Editor and Publisher, Times Colonist</p></aside>
           </article>
         </div>
       </div>
