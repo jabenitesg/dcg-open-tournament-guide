@@ -891,9 +891,9 @@
     }
     .map-head > p { max-width: 570px; margin: 0; color: var(--muted); line-height: 1.75; }
     .map-frame { position: relative; display: block; padding: 10px; overflow: hidden; border: 1px solid var(--line); background: white; box-shadow: var(--shadow); }
-    .map-image-stage { position: relative; aspect-ratio: 1800 / 814; overflow: hidden; background: white; }
-    .map-canvas { position: absolute; inset: 0; transform: translateX(-4%) scale(1.18); transform-origin: center; }
-    .map-image-link { display: block; width: 100%; height: 100%; }
+    .map-image-stage { position: relative; aspect-ratio: 3366 / 2916; overflow: hidden; background: white; }
+    .map-canvas { position: absolute; inset: 0; }
+    .map-image-link { width: 100%; height: 100%; padding: 0; display: block; border: 0; background: transparent; cursor: zoom-in; }
     .map-frame img { width: 100%; height: 100%; display: block; object-fit: contain; background: white; }
     .map-pointer { position: absolute; left: var(--x); top: var(--y); z-index: 2; width: 34px; height: 34px; display: grid; place-items: center; border: 3px solid white; border-radius: 50%; background: var(--blue); color: white; font: 850 10px/1 "Montserrat",sans-serif; box-shadow: 0 5px 16px rgba(14,14,49,.4); opacity: 0; pointer-events: none; transform: translate(-50%,-50%) scale(.55); transition: opacity .18s ease, transform .18s ease; }
     .map-pointer::after { content: ""; position: absolute; inset: -8px; border: 2px solid rgba(46,96,222,.42); border-radius: inherit; animation: map-pulse 1.55s ease-out infinite; }
@@ -1095,7 +1095,7 @@
     .map-filter-bar button:hover { border-color: var(--blue); }
     .map-filter-bar button.active { border-color: var(--gold); background: var(--gold); color: var(--forest-deep); }
     .map-key-note { margin: 0 0 14px; display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: 10px; line-height: 1.5; }
-    .map-key-note::before { content: "A"; width: 28px; height: 28px; flex: 0 0 28px; display: grid; place-items: center; border-radius: 50%; background: linear-gradient(135deg,#0E0E31,#2E60DE); color: white; font-size: 10px; font-weight: 850; }
+    .map-key-note::before { content: "AG"; width: 30px; height: 30px; flex: 0 0 30px; display: grid; place-items: center; border-radius: 50%; background: linear-gradient(135deg,#0E0E31,#2E60DE); color: white; font-size: 9px; font-weight: 850; }
     .map-arrival-alert { margin-bottom: 16px; padding: 17px 18px; display: grid; gap: 5px; border-left: 4px solid var(--blue); background: white; box-shadow: 0 12px 30px rgba(15,16,45,.06); }
     .map-arrival-alert strong { color: var(--ink); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; }
     .map-arrival-alert span { color: var(--muted); font-size: 11px; line-height: 1.55; }
@@ -1214,13 +1214,13 @@
       .charity-mark { width: 170px; height: 170px; }
       .charity-feature-content > p:not(.charity-label) { font-size: 17px; line-height: 1.65; }
       .compact-letters { padding: 68px 0; }
-      .map-explorer { grid-template-columns: minmax(0,1.45fr) minmax(360px,.8fr); align-items: stretch; gap: 16px; }
-      .map-explorer .map-visual-column { height: 100%; }
-      .map-explorer .map-frame { height: 100%; }
-      .map-explorer .map-image-stage { height: 100%; min-height: 440px; aspect-ratio: auto; }
+      .map-explorer { grid-template-columns: minmax(0,1.45fr) minmax(360px,.8fr); align-items: start; gap: 16px; }
+      .map-explorer .map-visual-column { height: auto; }
+      .map-explorer .map-frame { height: auto; }
+      .map-explorer .map-image-stage { height: auto; min-height: 0; aspect-ratio: 3366 / 2916; }
       .map-explorer .map-canvas {
-        inset: auto; left: 50%; top: 50%; width: 100%; height: auto; aspect-ratio: 1800 / 814;
-        transform: translate(-53%,-50%) scale(1.33); transform-origin: center;
+        inset: 0; left: auto; top: auto; width: auto; height: auto; aspect-ratio: auto;
+        transform: none;
       }
       .map-explorer .map-directory { margin-top: 0; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
       .map-explorer .map-directory-item { min-height: 96px; padding: 13px; }
@@ -1275,7 +1275,7 @@
     .map-modal-head button { min-height: 42px; padding: 0 15px; border: 1px solid var(--ink); border-radius: 4px; background: white; color: var(--ink); font-size: 10px; font-weight: 800; cursor: pointer; text-transform: uppercase; }
     .map-modal > p { margin: 14px 0; color: var(--muted); font-size: 12px; }
     .map-zoom-scroll { position: relative; overflow: auto; border: 1px solid var(--line); background: white; }
-    .map-zoom-scroll img { width: 1000px; max-width: none; transform: translateX(-8.5%); }
+    .map-zoom-scroll img { width: max(100%,1200px); max-width: none; transform: none; }
     .map-modal-source { display: inline-flex; margin-top: 13px; color: var(--blue); font-size: 11px; font-weight: 800; text-underline-offset: 4px; text-transform: uppercase; }
     .schedule-tools { margin-top: 18px; padding: 18px; display: grid; gap: 12px; border-radius: 7px; background: var(--forest-deep); color: white; }
     .schedule-tools div { display: grid; gap: 4px; }
@@ -1704,44 +1704,53 @@
           <button type="button" data-map-filter="amenities" aria-pressed="false">Amenities</button>
           <button type="button" data-map-filter="arrival" aria-pressed="false">Arrival</button>
         </div>
-        <p class="map-key-note">Tap a card below to point out its location. The same code is printed on the official map.</p>
+        <p class="map-key-note">Tap a card to point out its location, or tap the map to enlarge it. The same code is printed on the official map.</p>
         <div class="map-explorer">
           <div class="map-visual-column">
             <div class="map-frame" id="interactive-course-map">
               <div class="map-image-stage">
                 <div class="map-canvas">
-                  <a class="map-image-link" href="https://static.wixstatic.com/media/3b7ba0_c9b7b91997164ee08fc2f767316b12fe~mv2.png" target="_blank" rel="noopener" aria-label="Open the official Uplands course map at full size">
-                    <img src="assets/uplands-course-map-clean.png" alt="Digital Commerce Group Open spectator map of Uplands Golf Club" loading="lazy">
-                  </a>
-                  <span class="map-pointer" data-map-point="A" style="--x:61%;--y:48%" aria-hidden="true">A</span>
-                  <span class="map-pointer" data-map-point="A" style="--x:87%;--y:14%" aria-hidden="true">A</span>
-                  <span class="map-pointer" data-map-point="B" style="--x:59.5%;--y:47%" aria-hidden="true">B</span>
-                  <span class="map-pointer" data-map-point="CH" style="--x:57.5%;--y:53%" aria-hidden="true">CH</span>
-                  <span class="map-pointer" data-map-point="FB" style="--x:54.5%;--y:51%" aria-hidden="true">FB</span>
-                  <span class="map-pointer" data-map-point="PF" style="--x:43.5%;--y:61%" aria-hidden="true">PF</span>
-                  <span class="map-pointer" data-map-point="P" style="--x:52%;--y:51%" aria-hidden="true">P</span>
-                  <span class="map-pointer" data-map-point="SC" style="--x:59%;--y:43.5%" aria-hidden="true">SC</span>
-                  <span class="map-pointer" data-map-point="W" style="--x:50%;--y:51%" aria-hidden="true">W</span>
+                  <button type="button" class="map-image-link" id="map-zoom-open" aria-label="Enlarge the official Uplands course map">
+                    <img src="assets/uplands-course-map-2026.jpg" alt="2026 Digital Commerce Group Open spectator map of Uplands Golf Club" loading="lazy">
+                  </button>
+                  <span class="map-pointer" data-map-point="AG" style="--x:66.6%;--y:8.9%" aria-hidden="true">AG</span>
+                  <span class="map-pointer" data-map-point="AG" style="--x:42.5%;--y:55.4%" aria-hidden="true">AG</span>
+                  <span class="map-pointer" data-map-point="B" style="--x:40%;--y:53.4%" aria-hidden="true">B</span>
+                  <span class="map-pointer" data-map-point="C" style="--x:38.9%;--y:50.9%" aria-hidden="true">C</span>
+                  <span class="map-pointer" data-map-point="CH" style="--x:39.9%;--y:58.1%" aria-hidden="true">CH</span>
+                  <span class="map-pointer" data-map-point="FB" style="--x:35.1%;--y:60%" aria-hidden="true">FB</span>
+                  <span class="map-pointer" data-map-point="PF" style="--x:25.5%;--y:65.8%" aria-hidden="true">PF</span>
+                  <span class="map-pointer" data-map-point="PG" style="--x:34.1%;--y:56.8%" aria-hidden="true">PG</span>
+                  <span class="map-pointer" data-map-point="VP" style="--x:32.1%;--y:65.8%" aria-hidden="true">VP</span>
+                  <span class="map-pointer" data-map-point="SC" style="--x:34.8%;--y:52%" aria-hidden="true">SC</span>
+                  <span class="map-pointer" data-map-point="W" style="--x:56.1%;--y:9.7%" aria-hidden="true">W</span>
+                  <span class="map-pointer" data-map-point="W" style="--x:22.2%;--y:52%" aria-hidden="true">W</span>
+                  <span class="map-pointer" data-map-point="W" style="--x:31.3%;--y:57.1%" aria-hidden="true">W</span>
+                  <span class="map-pointer" data-map-point="W" style="--x:31.3%;--y:81.6%" aria-hidden="true">W</span>
+                  <span class="map-pointer" data-map-point="BL" style="--x:32.3%;--y:69.4%" aria-hidden="true">BL</span>
                 </div>
               </div>
             </div>
           </div>
           <div class="map-directory" aria-live="polite">
-            <button type="button" class="map-directory-item" data-map-category="arrival" data-map-target="A" aria-pressed="false"><span class="map-code">A</span><span class="map-card-copy"><span class="map-category">Arrival</span><b>Public Admissions Gate</b></span></button>
-            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="B" aria-pressed="false"><span class="map-code">B</span><span class="map-card-copy"><span class="map-category">Watch Golf</span><b>Bleacher Area</b></span></button>
+            <button type="button" class="map-directory-item" data-map-category="arrival" data-map-target="AG" aria-pressed="false"><span class="map-code">AG</span><span class="map-card-copy"><span class="map-category">Arrival</span><b>Public Admissions Gates</b></span></button>
+            <button type="button" class="map-directory-item" data-map-category="food" data-map-target="B" aria-pressed="false"><span class="map-code">B</span><span class="map-card-copy"><span class="map-category">Food &amp; Drink</span><b>Birdie Bar</b></span></button>
+            <button type="button" class="map-directory-item" data-map-category="amenities" data-map-target="C" aria-pressed="false"><span class="map-code">C</span><span class="map-card-copy"><span class="map-category">Amenities</span><b>Caddie Tent</b></span></button>
             <button type="button" class="map-directory-item" data-map-category="amenities" data-map-target="CH" aria-pressed="false"><span class="map-code">CH</span><span class="map-card-copy"><span class="map-category">Amenities</span><b>Clubhouse</b></span></button>
             <button type="button" class="map-directory-item" data-map-category="food" data-map-target="FB" aria-pressed="false"><span class="map-code">FB</span><span class="map-card-copy"><span class="map-category">Food &amp; Drink</span><b>Public Food &amp; Beverage Tent</b></span></button>
-            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="PF" aria-pressed="false"><span class="map-code">PF</span><span class="map-card-copy"><span class="map-category">Watch Golf</span><b>Practice Facility Area</b></span></button>
-            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="P" aria-pressed="false"><span class="map-code">P</span><span class="map-card-copy"><span class="map-category">Watch Golf</span><b>Putting Green Area</b></span></button>
-            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="SC" aria-pressed="false"><span class="map-code">SC</span><span class="map-card-copy"><span class="map-category">Watch Golf</span><b>Leaderboards</b></span></button>
+            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="PF" aria-pressed="false"><span class="map-code">PF</span><span class="map-card-copy"><span class="map-category">Watch Golf</span><b>Practice Facility</b></span></button>
+            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="PG" aria-pressed="false"><span class="map-code">PG</span><span class="map-card-copy"><span class="map-category">Watch Golf</span><b>Putting Green Area</b></span></button>
+            <button type="button" class="map-directory-item" data-map-category="arrival" data-map-target="VP" aria-pressed="false"><span class="map-code">VP</span><span class="map-card-copy"><span class="map-category">Parking</span><b>VIP / Player Parking</b></span></button>
+            <button type="button" class="map-directory-item" data-map-category="golf" data-map-target="SC" aria-pressed="false"><span class="map-code">SC</span><span class="map-card-copy"><span class="map-category">Watch Golf</span><b>Leaderboard</b></span></button>
             <button type="button" class="map-directory-item" data-map-category="amenities" data-map-target="W" aria-pressed="false"><span class="map-code">W</span><span class="map-card-copy"><span class="map-category">Amenities</span><b>Public Washrooms</b></span></button>
+            <button type="button" class="map-directory-item" data-map-category="arrival" data-map-target="BL" aria-pressed="false"><span class="map-code">BL</span><span class="map-card-copy"><span class="map-category">Arrival</span><b>Bike Locker</b></span></button>
           </div>
         </div>
         <dialog class="map-modal" id="map-modal" aria-labelledby="map-modal-title">
           <div class="map-modal-head"><div><span>Uplands Golf Club</span><h3 id="map-modal-title">Course map</h3></div><button type="button" id="map-zoom-close">Close</button></div>
-          <p>Scroll horizontally to inspect the map, then match the codes with the directory.</p>
-          <div class="map-zoom-scroll"><img src="assets/uplands-course-map-clean.png" alt="Enlarged spectator map of Uplands Golf Club"></div>
-          <a class="map-modal-source" href="https://static.wixstatic.com/media/3b7ba0_c9b7b91997164ee08fc2f767316b12fe~mv2.png" target="_blank" rel="noopener">Open original map ↗</a>
+          <p>Scroll to inspect the map, then match the codes with the directory.</p>
+          <div class="map-zoom-scroll"><img src="assets/uplands-course-map-2026.jpg" alt="Enlarged 2026 spectator map of Uplands Golf Club"></div>
+          <a class="map-modal-source" href="assets/uplands-course-map-2026.jpg" target="_blank" rel="noopener">Open full-size map ↗</a>
         </dialog>
       </div>
     </section>
