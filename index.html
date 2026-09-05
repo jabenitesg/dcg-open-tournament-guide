@@ -1115,6 +1115,30 @@
     .map-explorer { display: grid; gap: 12px; }
     .map-visual-column { min-width: 0; }
 
+    .event-fun { overflow: hidden; background: linear-gradient(118deg,#0E0E31 0%,#193579 58%,#2E60DE 100%); color: white; }
+    .event-fun .wrap { position: relative; z-index: 1; }
+    .event-fun .section-head { margin-bottom: 32px; }
+    .event-fun .section-number { color: var(--gold); }
+    .event-fun .section-head h2 { color: white; font-family: "Warbler Banner", Georgia, serif; }
+    .event-fun .section-head p { color: rgba(255,255,255,.76); }
+    .event-fun .experience-grid { gap: 10px; }
+    .event-fun .experience-card,
+    .event-fun .experience-card:nth-child(1) {
+      min-height: 200px !important; padding: 22px; border: 1px solid rgba(255,255,255,.16); border-top: 4px solid var(--gold);
+      border-radius: 10px; background: rgba(255,255,255,.08); color: white; box-shadow: 0 18px 42px rgba(5,8,31,.14);
+    }
+    .event-fun .experience-tag { padding: 0; background: transparent; color: var(--gold); font-size: 10px; }
+    .event-fun .experience-card h3 { color: white; font-family: "Warbler Banner", Georgia, serif; font-size: 34px; }
+    .event-fun .experience-card p { color: rgba(255,255,255,.72); opacity: 1; font-size: 16px; line-height: 1.55; }
+
+    @media (min-width: 720px) {
+      .event-fun .experience-card { min-height: 220px !important; }
+    }
+
+    @media (min-width: 980px) {
+      .event-fun .experience-card { min-height: 245px !important; }
+    }
+
     .essentials-band {
       padding: 74px 0;
       background: linear-gradient(112deg, #0E0E31 0%, #193579 56%, #2E60DE 100%);
@@ -1752,6 +1776,22 @@
           <div class="map-zoom-scroll"><img src="assets/uplands-course-map-2026.jpg" alt="Enlarged 2026 spectator map of Uplands Golf Club"></div>
           <a class="map-modal-source" href="assets/uplands-course-map-2026.jpg" target="_blank" rel="noopener">Open full-size map ↗</a>
         </dialog>
+      </div>
+    </section>
+
+    <section class="experience event-fun" id="event-experience">
+      <div class="wrap">
+        <header class="section-head light">
+          <span class="section-number">Eat · Drink · Gather</span>
+          <h2>Make a day of it</h2>
+          <p>Beyond the golf, enjoy places to eat, meet up and take in the tournament atmosphere.</p>
+        </header>
+        <div class="experience-grid">
+          <article class="experience-card"><span class="experience-tag">From the grill</span><div><h3>BBQ Area</h3><p>Stop by the BBQ area for a bite between groups.</p></div></article>
+          <article class="experience-card"><span class="experience-tag">Grab a slice</span><div><h3>Pizza Area</h3><p>Recharge before heading back out to follow the action.</p></div></article>
+          <article class="experience-card"><span class="experience-tag">Drinks &amp; atmosphere</span><div><h3>Birdie Bar</h3><p>Meet up for a drink and enjoy the energy of tournament day.</p></div></article>
+          <article class="experience-card"><span class="experience-tag">Gather &amp; unwind</span><div><h3>19th Green</h3><p>Take a break, connect with fellow spectators and enjoy the social side of the event.</p></div></article>
+        </div>
       </div>
     </section>
 
