@@ -501,7 +501,10 @@
     .brand-copy small { color: var(--gold); opacity: 1; }
     .desktop-nav a { font-family: "Montserrat", sans-serif; letter-spacing: .04em; text-transform: uppercase; font-size: 10px; }
     .desktop-nav a:hover { color: var(--gold); }
-    .ticket-mini { border-radius: 4px; background: var(--blue); color: white !important; }
+    .ticket-mini { border-radius: 4px; background: #141939; color: white !important; transition: background .2s ease, color .2s ease; }
+    .ticket-mini:hover, .ticket-mini:focus-visible { background: #ffffff; color: #141939 !important; }
+    .menu-panel a.menu-ticket { background: #141939; color: white; transition: background .2s ease, color .2s ease; }
+    .menu-panel a.menu-ticket:hover, .menu-panel a.menu-ticket:focus-visible { background: #ffffff; color: #141939; }
 
     @media (max-width: 520px) {
       .topbar-inner { gap: 10px; }
