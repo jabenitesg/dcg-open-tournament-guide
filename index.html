@@ -1059,6 +1059,23 @@
     .schedule-copy > span { color: var(--blue); font-size: 8px; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
     .schedule-copy h3 { margin: 26px 0 10px; color: var(--ink); font: 700 20px/1.05 "Montserrat", sans-serif; letter-spacing: -.03em; }
     .schedule-copy p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.55; }
+    .watch-list { padding: 74px 0; background: white; color: var(--ink); }
+    .watch-head { max-width: 820px; margin-bottom: 34px; }
+    .watch-head h2 { margin: 12px 0; color: var(--ink); font: italic 500 clamp(3.2rem,12vw,6rem)/.84 "Cormorant Garamond", Georgia, serif; letter-spacing: -.045em; }
+    .watch-head p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+    .watch-grid { margin-inline: calc(var(--pad) * -1); padding: 0 var(--pad) 13px; display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: var(--gold) transparent; }
+    .watch-card { min-height: 280px; flex: 0 0 min(78vw,310px); padding: 22px; display: flex; flex-direction: column; overflow: hidden; scroll-snap-align: start; border: 1px solid var(--line); border-radius: 8px; background: var(--cream); box-shadow: 0 16px 34px rgba(15,16,45,.06); }
+    .watch-card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .watch-rank { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 50%; background: linear-gradient(135deg,#0E0E31,#2E60DE); color: white; font-size: 12px; font-weight: 850; }
+    .watch-card-top small { color: var(--blue); font-size: 8px; font-weight: 850; letter-spacing: .1em; text-align: right; text-transform: uppercase; }
+    .watch-card h3 { margin: auto 0 12px; color: var(--ink); font: 700 21px/1.05 "Montserrat", sans-serif; letter-spacing: -.035em; text-transform: uppercase; }
+    .watch-card p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .watch-footer { margin-top: 18px; padding-top: 18px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; border-top: 1px solid var(--line); }
+    .watch-footer p { margin: 0; color: var(--muted); font-size: 10px; }
+    .watch-links { display: flex; flex-wrap: wrap; gap: 9px; }
+    .watch-links a { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--blue); border-radius: 4px; color: var(--blue); font-size: 9px; font-weight: 850; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
+    .watch-links a:first-child { background: var(--blue); color: white; }
+    .watch-links a:hover { transform: translateY(-2px); }
     .weather-strip { padding: 0 0 74px; background: var(--cream); }
     .week-dashboard { display: grid; gap: 14px; }
     .week-schedule { overflow: hidden; border: 1px solid var(--line); border-radius: 9px; background: white; }
@@ -1219,6 +1236,8 @@
       .week-dashboard { grid-template-columns: 1.08fr .92fr; align-items: stretch; }
       .schedule-grid { margin-inline: 0; padding-inline: 0; display: grid; grid-template-columns: repeat(2,1fr); overflow: visible; }
       .schedule-card { min-width: 0; }
+      .watch-grid { margin-inline: 0; padding-inline: 0; display: grid; grid-template-columns: repeat(2,1fr); overflow: visible; }
+      .watch-card { min-width: 0; }
       .compact-weather .weather-main { grid-template-columns: 1.1fr .9fr; }
       .map-directory { grid-template-columns: repeat(4,1fr); }
       .map-arrival-alert { grid-template-columns: auto 1fr; align-items: center; gap: 18px; }
@@ -1230,8 +1249,9 @@
     }
 
     @media (min-width: 980px) {
-      .today, .course-map-section, .essentials-band, .champions { padding: 86px 0; }
+      .today, .watch-list, .course-map-section, .essentials-band, .champions { padding: 86px 0; }
       .schedule-grid { grid-template-columns: repeat(4,1fr); }
+      .watch-grid { grid-template-columns: repeat(5,1fr); }
       .schedule-copy { min-height: 190px; padding: 24px; }
       .schedule-copy h3 { font-size: 22px; }
       .weather-strip { padding-bottom: 86px; }
@@ -1607,7 +1627,7 @@
         </button>
       </div>
       <nav class="desktop-nav" aria-label="Primary navigation">
-        <a href="#course-map">Map</a><a href="#today">Schedule</a><a href="#plan">Before You Go</a><a href="#champions">Winners</a>
+        <a href="#course-map">Map</a><a href="#today">Schedule</a><a href="#players">Players</a><a href="#plan">Before You Go</a><a href="#champions">Winners</a>
         <a class="ticket-mini" href="https://www.eventbrite.ca/e/the-digital-commerce-group-open-tickets-1982394960692" target="_blank" rel="noopener">Get tickets ↗</a>
       </nav>
       <button class="menu-button" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="menu"><i class="ph ph-list" aria-hidden="true"></i></button>
@@ -1625,10 +1645,11 @@
       <div class="menu-links">
         <a href="#today">Schedule &amp; cut <span>01</span></a>
         <a href="#course-map">Course map <span>02</span></a>
-        <a href="#plan">Before you go <span>03</span></a>
-        <a href="#pathway">How it works <span>04</span></a>
-        <a href="#champions">Tour &amp; winners <span>05</span></a>
-        <a href="#charity">Easter Seals <span>06</span></a>
+        <a href="#players">Who to watch <span>03</span></a>
+        <a href="#plan">Before you go <span>04</span></a>
+        <a href="#pathway">How it works <span>05</span></a>
+        <a href="#champions">Tour &amp; winners <span>06</span></a>
+        <a href="#charity">Easter Seals <span>07</span></a>
       </div>
       <div class="menu-footer">
         <div class="menu-live" aria-label="Current time and weather at Uplands Golf Club">
@@ -1836,10 +1857,28 @@
       </div>
     </section>
 
+    <section class="watch-list" id="players" aria-labelledby="watch-title">
+      <div class="wrap">
+        <header class="watch-head">
+          <span class="section-number">03 · Player spotlight</span>
+          <h2 id="watch-title">Who to watch</h2>
+          <p>Five contenders bringing form, wins and local history to Uplands this week.</p>
+        </header>
+        <div class="watch-grid">
+          <article class="watch-card"><div class="watch-card-top"><span class="watch-rank">No. 1</span><small>Season leader</small></div><h3>Thomas Ponder</h3><p>One win and eight top-10 finishes in 12 starts make him the benchmark at Uplands.</p></article>
+          <article class="watch-card"><div class="watch-card-top"><span class="watch-rank">No. 2</span><small>In the chase</small></div><h3>Corey Pereira</h3><p>A winner this season with five top-10s, he begins the week closest to Ponder.</p></article>
+          <article class="watch-card"><div class="watch-card-top"><span class="watch-rank">No. 3</span><small>Proven winner</small></div><h3>Patrick Flavin</h3><p>A tournament winner with four top-10 finishes and a firm place inside The 10.</p></article>
+          <article class="watch-card"><div class="watch-card-top"><span class="watch-rank">No. 4</span><small>Past champion</small></div><h3>Étienne Papineau</h3><p>The 2023 Uplands champion returns after winning the 2026 Osprey Valley Open.</p></article>
+          <article class="watch-card"><div class="watch-card-top"><span class="watch-rank">No. 9</span><small>Canadian contender</small></div><h3>Joey Savoie</h3><p>The Quebec native owns a 2026 victory and arrives inside the promotion places.</p></article>
+        </div>
+        <div class="watch-footer"><p>Points List positions entering tournament week.</p><div class="watch-links"><a href="https://www.pgatour.com/americas/tournaments/2026/digital-commerce-group-open/Y2026007/field" target="_blank" rel="noopener">View full field ↗</a><a href="https://www.pgatour.com/americas/tournaments/2026/digital-commerce-group-open/Y2026007/tee-times" target="_blank" rel="noopener">Find tee times ↗</a></div></div>
+      </div>
+    </section>
+
     <section class="essentials-band" id="plan">
       <div class="wrap">
         <header class="section-head compact-head">
-          <span class="section-number">03 · Before you go</span>
+          <span class="section-number">04 · Before you go</span>
           <h2>Know before you go</h2>
           <p>Everything you need for a smooth arrival and a great day at Uplands.</p>
         </header>
@@ -1855,7 +1894,7 @@
 
     <section class="tour-story" id="pathway">
       <div class="wrap">
-        <header class="pathway-head"><span class="section-number">04 · How it works</span><h2>The path to the PGA TOUR</h2><p>The DCG Open is one stop in a season-long race. Players earn points here, chase promotion and move one step closer to golf’s highest level.</p></header>
+        <header class="pathway-head"><span class="section-number">05 · How it works</span><h2>The path to the PGA TOUR</h2><p>The DCG Open is one stop in a season-long race. Players earn points here, chase promotion and move one step closer to golf’s highest level.</p></header>
         <div class="pathway-cards">
           <article class="pathway-card">
             <div class="pathway-logo logo-horizontal"><img src="assets/pga-tour-americas-logo.png" alt="PGA TOUR Americas logo" loading="lazy"></div>
@@ -1877,7 +1916,7 @@
     <section class="champions" id="champions">
       <div class="wrap">
         <header class="champions-head">
-          <div><span class="section-number">05 · Tournament history</span><h2>Past champions</h2></div>
+          <div><span class="section-number">06 · Tournament history</span><h2>Past champions</h2></div>
           <p>Meet the three most recent champions crowned at Uplands Golf Club.</p>
         </header>
         <div class="champion-grid">
@@ -1892,7 +1931,7 @@
     <section class="charity charity-feature" id="charity">
       <div class="charity-feature-bg" aria-hidden="true"></div>
       <div class="wrap charity-feature-content">
-        <p class="charity-label">06 · Our official charitable partner</p>
+        <p class="charity-label">07 · Our official charitable partner</p>
         <div class="charity-logo-card"><img src="https://www.eastersealsbcy.ca/wp-content/uploads/2024/10/Easter-Seals-BCY-Red-PRIMARY-LOGO.png" alt="Easter Seals BC and Yukon"></div>
         <h2>Creating life-changing opportunities</h2>
         <p>Ticket proceeds from the Digital Commerce Group Open benefit <strong>Easter Seals Camp Shawnigan</strong>, helping children and youth with disabilities build confidence, independence and lasting friendships.</p>
