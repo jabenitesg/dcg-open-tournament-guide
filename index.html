@@ -1603,6 +1603,88 @@
     .back-to-top:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
     @media (min-width: 980px) { .back-to-top { bottom: 28px; } }
 
+    .tee-now { padding: 20px 0; border-bottom: 1px solid var(--line); background: white; }
+    .tee-now-card { padding: 20px; overflow: hidden; border: 1px solid rgba(0,70,194,.18); border-radius: 10px; background: linear-gradient(135deg,#0E0E31,#18285f); color: white; box-shadow: 0 18px 42px rgba(14,14,49,.14); }
+    .tee-now-head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 14px 24px; }
+    .tee-now-heading { display: grid; gap: 5px; }
+    .tee-now-label { display: flex; align-items: center; gap: 8px; color: var(--gold); font-size: 12px; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
+    .tee-live-dot { width: 8px; height: 8px; flex: 0 0 auto; border-radius: 50%; background: #71e0a3; box-shadow: 0 0 0 5px rgba(113,224,163,.12); }
+    .tee-now-card.is-next .tee-live-dot, .tee-now-card.is-loading .tee-live-dot { background: var(--gold); box-shadow: 0 0 0 5px rgba(195,165,112,.13); }
+    .tee-now-card.is-complete .tee-live-dot, .tee-now-card.is-unavailable .tee-live-dot { background: #8e96b6; box-shadow: none; }
+    .tee-now-title { margin: 0; color: white; font: 600 32px/.95 "Warbler Banner", Georgia, serif; letter-spacing: -.035em; }
+    .tee-now-clock { min-width: 150px; text-align: left; }
+    .tee-now-clock strong { display: block; color: white; font-size: 22px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+    .tee-now-clock span { display: block; margin-top: 5px; color: rgba(255,255,255,.62); font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+    .tee-now-groups { margin-top: 18px; display: grid; gap: 10px; }
+    .tee-group { min-height: 112px; padding: 16px; border: 1px solid rgba(255,255,255,.14); border-radius: 7px; background: rgba(255,255,255,.07); }
+    .tee-group[hidden] { display: none; }
+    .tee-group-label { display: block; margin-bottom: 10px; color: var(--gold); font-size: 12px; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
+    .tee-group ul { margin: 0; padding: 0; display: grid; gap: 5px; list-style: none; }
+    .tee-group li { color: white; font-size: 16px; font-weight: 700; line-height: 1.35; }
+    .tee-now-foot { margin-top: 15px; padding-top: 15px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; border-top: 1px solid rgba(255,255,255,.13); }
+    .tee-next { margin: 0; color: rgba(255,255,255,.72); font-size: 14px; line-height: 1.5; }
+    .tee-official-link { min-height: 44px; padding: 0 14px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.32); border-radius: 4px; color: white; font-size: 12px; font-weight: 850; letter-spacing: .07em; text-decoration: none; text-transform: uppercase; }
+    .tee-official-link:hover { background: white; color: var(--forest-deep); }
+    .tee-now-message { margin: 18px 0 0; color: rgba(255,255,255,.78); font-size: 16px; line-height: 1.55; }
+    .tee-now-message[hidden] { display: none; }
+
+    /* Legibility refinement for on-course viewing. */
+    .compact-letters-head > p,
+    .map-head > p,
+    .schedule-head p,
+    .watch-head p,
+    .schedule-copy p,
+    .watch-card p,
+    .essential-grid p,
+    .visitor-accordion details p,
+    .pathway-card p,
+    .champion-info p,
+    .charity-feature-content > p:not(.charity-label),
+    .footer-meta,
+    .footer-update { font-size: 16px; line-height: 1.6; }
+    .watch-card-copy { min-height: 245px; }
+    .schedule-copy > span,
+    .watch-card-copy small,
+    .schedule-photo time,
+    .pathway-step,
+    .champion-info > span,
+    .champion-club,
+    .map-directory .map-category { font-size: 12px !important; }
+    .section-number,
+    .map-arrival-alert strong,
+    .map-arrival-alert span,
+    .map-key-note,
+    .schedule-tools strong,
+    .source-links a { font-size: 14px; }
+    .map-directory b { font-size: 15px; }
+    .map-filter-bar button,
+    .map-action,
+    .watch-links a,
+    .schedule-tools a,
+    .accordion-link,
+    .pathway-card a,
+    .champions-link,
+    .charity-text-link,
+    .charity-btn { font-size: 12px; }
+    .desktop-nav a { font-size: 12px; }
+    .bottom-nav a { font-size: 11px; }
+
+    @media (min-width: 680px) {
+      .tee-now { padding: 24px 0; }
+      .tee-now-card { padding: 24px; }
+      .tee-now-groups { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .tee-now-clock { text-align: right; }
+    }
+
+    @media (max-width: 759px) {
+      .hero .quick-action strong { font-size: 14px; }
+      .menu-panel .menu-links a { font-size: 15px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .watch-photo img, .back-to-top, .tee-official-link { transition: none; }
+    }
+
     h1, h2, h3,
     .menu-panel-head strong,
     .hero-title,
@@ -1691,6 +1773,26 @@
           </a>
         </div>
         <div class="hero-utility" aria-label="Tournament essentials"><span><i class="ph ph-clock" aria-hidden="true"></i> First groups 7:00 AM</span><span><i class="ph ph-signpost" aria-hidden="true"></i> Nos. 1 &amp; 10 tees</span><span><i class="ph ph-ticket" aria-hidden="true"></i> Daily &amp; weekly admission</span></div>
+      </div>
+    </section>
+
+    <section class="tee-now" id="on-the-tee" aria-labelledby="tee-now-title">
+      <div class="wrap">
+        <div class="tee-now-card is-loading" id="tee-now-card" aria-live="polite">
+          <div class="tee-now-head">
+            <div class="tee-now-heading">
+              <span class="tee-now-label"><span class="tee-live-dot" aria-hidden="true"></span><span id="tee-now-status">Loading official groupings</span></span>
+              <h2 class="tee-now-title" id="tee-now-title">On the tee</h2>
+            </div>
+            <div class="tee-now-clock"><strong id="tee-now-time">—</strong><span id="tee-now-round">PGA TOUR Americas</span></div>
+          </div>
+          <div class="tee-now-groups" id="tee-now-groups" hidden>
+            <article class="tee-group" id="tee-group-1"><span class="tee-group-label">Tee No. 1</span><ul></ul></article>
+            <article class="tee-group" id="tee-group-10"><span class="tee-group-label">Tee No. 10</span><ul></ul></article>
+          </div>
+          <p class="tee-now-message" id="tee-now-message">Checking the latest official tee times…</p>
+          <div class="tee-now-foot"><p class="tee-next" id="tee-next">Times shown in Victoria local time.</p><a class="tee-official-link" href="https://www.pgatour.com/americas/tournaments/2026/digital-commerce-group-open/Y2026007/tee-times" target="_blank" rel="noopener">All tee times ↗</a></div>
+        </div>
       </div>
     </section>
 
@@ -1965,6 +2067,128 @@
   <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top" aria-hidden="true" tabindex="-1"><i class="ph ph-arrow-up" aria-hidden="true"></i></button>
 
   <script>
+    const teeTimesEndpoint = '/api/tee-times';
+    const teeTimeCard = document.getElementById('tee-now-card');
+    const teeTimeStatus = document.getElementById('tee-now-status');
+    const teeTimeTitle = document.getElementById('tee-now-title');
+    const teeTimeValue = document.getElementById('tee-now-time');
+    const teeTimeRound = document.getElementById('tee-now-round');
+    const teeTimeGroups = document.getElementById('tee-now-groups');
+    const teeTimeMessage = document.getElementById('tee-now-message');
+    const teeTimeNext = document.getElementById('tee-next');
+    let officialTeeTimes = null;
+
+    const teeTimeFormatter = new Intl.DateTimeFormat('en-CA', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Vancouver' });
+    const teeDateFormatter = new Intl.DateTimeFormat('en-CA', { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'America/Vancouver' });
+
+    function setTeeCardState(state) {
+      teeTimeCard.classList.remove('is-loading', 'is-next', 'is-live', 'is-complete', 'is-unavailable');
+      teeTimeCard.classList.add('is-' + state);
+    }
+
+    function setTeeGroup(tee, groups) {
+      const panel = document.getElementById('tee-group-' + tee);
+      if (!panel) return;
+      const group = groups.find(item => String(item.tee) === String(tee));
+      panel.hidden = !group;
+      const list = panel.querySelector('ul');
+      list.replaceChildren();
+      if (group) group.players.forEach(player => { const item = document.createElement('li'); item.textContent = player; list.appendChild(item); });
+    }
+
+    function formatTeeSlot(date, includeDate = false) {
+      return (includeDate ? teeDateFormatter.format(date) + ' · ' : '') + teeTimeFormatter.format(date);
+    }
+
+    function renderTeeTimes() {
+      if (!officialTeeTimes?.groups?.length) return;
+      const now = new Date();
+      const groups = officialTeeTimes.groups.map(group => ({ ...group, date: new Date(group.timeUtc) })).filter(group => !Number.isNaN(group.date.getTime())).sort((a,b) => a.date - b.date);
+      const slots = [...new Set(groups.map(group => group.date.getTime()))];
+      if (!slots.length) return;
+      const first = slots[0];
+      const last = slots[slots.length - 1];
+      const nowTime = now.getTime();
+      let slotIndex = slots.findLastIndex(slot => slot <= nowTime);
+      let selectedTime;
+      let state;
+
+      if (nowTime < first) {
+        selectedTime = first;
+        slotIndex = 0;
+        state = 'next';
+      } else if (nowTime > last + 15 * 60 * 1000) {
+        setTeeCardState('complete');
+        teeTimeStatus.textContent = 'Round update';
+        teeTimeTitle.textContent = 'All groups are on the course';
+        teeTimeValue.textContent = teeTimeFormatter.format(new Date(last));
+        teeTimeRound.textContent = 'Round ' + officialTeeTimes.round + ' · Last scheduled start';
+        teeTimeGroups.hidden = true;
+        teeTimeMessage.hidden = false;
+        teeTimeMessage.textContent = 'Follow scoring and player positions on the official leaderboard.';
+        teeTimeNext.textContent = 'Tee times are scheduled and may be affected by on-course delays.';
+        return;
+      } else {
+        selectedTime = slots[Math.max(0, slotIndex)];
+        const followingTime = slots[slotIndex + 1];
+        if (followingTime && nowTime - selectedTime > 15 * 60 * 1000) {
+          selectedTime = followingTime;
+          slotIndex += 1;
+          state = 'next';
+        } else {
+          state = 'live';
+        }
+      }
+
+      const selectedGroups = groups.filter(group => group.date.getTime() === selectedTime);
+      const selectedDate = new Date(selectedTime);
+      const todayInVictoria = teeDateFormatter.format(now);
+      const includeDate = teeDateFormatter.format(selectedDate) !== todayInVictoria;
+      setTeeCardState(state);
+      teeTimeStatus.textContent = state === 'live' ? 'Scheduled on the tee now' : 'Next on the tee';
+      teeTimeTitle.textContent = state === 'live' ? 'On the tee' : 'Coming up';
+      teeTimeValue.textContent = formatTeeSlot(selectedDate, includeDate);
+      teeTimeRound.textContent = 'Round ' + officialTeeTimes.round + ' · Official groupings';
+      teeTimeGroups.hidden = false;
+      teeTimeMessage.hidden = true;
+      setTeeGroup(1, selectedGroups);
+      setTeeGroup(10, selectedGroups);
+
+      const nextTime = slots[slotIndex + 1];
+      if (nextTime) {
+        const minutes = Math.max(1, Math.ceil((nextTime - nowTime) / 60000));
+        const countdown = minutes <= 90 && minutes > 0 ? ' · in ' + minutes + ' min' : '';
+        teeTimeNext.textContent = 'Up next · ' + formatTeeSlot(new Date(nextTime), teeDateFormatter.format(new Date(nextTime)) !== todayInVictoria) + countdown;
+      } else {
+        teeTimeNext.textContent = 'Final scheduled groups of the day.';
+      }
+    }
+
+    async function loadOfficialTeeTimes() {
+      try {
+        const response = await fetch(teeTimesEndpoint, { headers: { accept: 'application/json' } });
+        if (!response.ok) throw new Error('Tee times unavailable');
+        const data = await response.json();
+        if (!data.groups?.length) throw new Error('No groupings available');
+        officialTeeTimes = data;
+        renderTeeTimes();
+      } catch (error) {
+        setTeeCardState('unavailable');
+        teeTimeStatus.textContent = 'Official tee times';
+        teeTimeTitle.textContent = 'Check today’s groupings';
+        teeTimeValue.textContent = 'PGA TOUR';
+        teeTimeRound.textContent = 'Latest official update';
+        teeTimeGroups.hidden = true;
+        teeTimeMessage.hidden = false;
+        teeTimeMessage.textContent = 'Live groupings could not be loaded. Use the official tee-times link for the latest schedule.';
+        teeTimeNext.textContent = 'Times and groupings may change.';
+      }
+    }
+
+    loadOfficialTeeTimes();
+    setInterval(renderTeeTimes, 30000);
+    setInterval(loadOfficialTeeTimes, 300000);
+
     const scheduleSection = document.getElementById('today');
     const mapSection = document.getElementById('course-map');
     if (scheduleSection && mapSection) mapSection.before(scheduleSection);
