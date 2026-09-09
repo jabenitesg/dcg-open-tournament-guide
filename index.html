@@ -1064,10 +1064,13 @@
     .watch-head h2 { margin: 12px 0; color: var(--ink); font: italic 500 clamp(3.2rem,12vw,6rem)/.84 "Cormorant Garamond", Georgia, serif; letter-spacing: -.045em; }
     .watch-head p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
     .watch-grid { margin-inline: calc(var(--pad) * -1); padding: 0 var(--pad) 13px; display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: var(--gold) transparent; }
-    .watch-card { min-height: 280px; flex: 0 0 min(78vw,310px); padding: 22px; display: flex; flex-direction: column; overflow: hidden; scroll-snap-align: start; border: 1px solid var(--line); border-radius: 8px; background: var(--cream); box-shadow: 0 16px 34px rgba(15,16,45,.06); }
-    .watch-card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-    .watch-rank { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 50%; background: linear-gradient(135deg,#0E0E31,#2E60DE); color: white; font-size: 12px; font-weight: 850; }
-    .watch-card-top small { color: var(--blue); font-size: 8px; font-weight: 850; letter-spacing: .1em; text-align: right; text-transform: uppercase; }
+    .watch-card { flex: 0 0 min(82vw,330px); overflow: hidden; scroll-snap-align: start; border: 1px solid var(--line); border-radius: 8px; background: white; box-shadow: 0 16px 34px rgba(15,16,45,.06); }
+    .watch-photo { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--forest-deep); }
+    .watch-photo img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center 40%; transition: transform .45s ease; }
+    .watch-card:hover .watch-photo img { transform: scale(1.035); }
+    .watch-rank { position: absolute; top: 12px; left: 12px; width: 52px; height: 52px; display: grid; place-items: center; border-radius: 50%; background: linear-gradient(135deg,#0E0E31,#2E60DE); color: white; font-size: 12px; font-weight: 850; box-shadow: 0 7px 18px rgba(10,17,58,.25); }
+    .watch-card-copy { min-height: 205px; padding: 20px; display: flex; flex-direction: column; }
+    .watch-card-copy small { color: var(--blue); font-size: 8px; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
     .watch-card h3 { margin: auto 0 12px; color: var(--ink); font: 700 21px/1.05 "Montserrat", sans-serif; letter-spacing: -.035em; text-transform: uppercase; }
     .watch-card p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
     .watch-footer { margin-top: 18px; padding-top: 18px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; border-top: 1px solid var(--line); }
@@ -1251,7 +1254,7 @@
     @media (min-width: 980px) {
       .today, .watch-list, .course-map-section, .essentials-band, .champions { padding: 86px 0; }
       .schedule-grid { grid-template-columns: repeat(4,1fr); }
-      .watch-grid { grid-template-columns: repeat(5,1fr); }
+      .watch-grid { grid-template-columns: repeat(3,1fr); }
       .schedule-copy { min-height: 190px; padding: 24px; }
       .schedule-copy h3 { font-size: 22px; }
       .weather-strip { padding-bottom: 86px; }
@@ -1862,14 +1865,15 @@
         <header class="watch-head">
           <span class="section-number">03 · Player spotlight</span>
           <h2 id="watch-title">Who to watch</h2>
-          <p>Five contenders bringing form, wins and local history to Uplands this week.</p>
+          <p>Six contenders bringing form, wins and local history to Uplands this week.</p>
         </header>
         <div class="watch-grid">
-          <article class="watch-card"><div class="watch-card-top"><span class="watch-rank">No. 1</span><small>Season leader</small></div><h3>Thomas Ponder</h3><p>One win and eight top-10 finishes in 12 starts make him the benchmark at Uplands.</p></article>
-          <article class="watch-card"><div class="watch-card-top"><span class="watch-rank">No. 2</span><small>In the chase</small></div><h3>Corey Pereira</h3><p>A winner this season with five top-10s, he begins the week closest to Ponder.</p></article>
-          <article class="watch-card"><div class="watch-card-top"><span class="watch-rank">No. 3</span><small>Proven winner</small></div><h3>Patrick Flavin</h3><p>A tournament winner with four top-10 finishes and a firm place inside The 10.</p></article>
-          <article class="watch-card"><div class="watch-card-top"><span class="watch-rank">No. 4</span><small>Past champion</small></div><h3>Étienne Papineau</h3><p>The 2023 Uplands champion returns after winning the 2026 Osprey Valley Open.</p></article>
-          <article class="watch-card"><div class="watch-card-top"><span class="watch-rank">No. 9</span><small>Canadian contender</small></div><h3>Joey Savoie</h3><p>The Quebec native owns a 2026 victory and arrives inside the promotion places.</p></article>
+          <article class="watch-card"><div class="watch-photo"><img src="assets/watch-thomas-ponder.webp" alt="Thomas Ponder following a tee shot" loading="lazy"><span class="watch-rank">No. 1</span></div><div class="watch-card-copy"><small>Season leader</small><h3>Thomas Ponder</h3><p>One win and eight top-10 finishes in 12 starts make him the benchmark at Uplands.</p></div></article>
+          <article class="watch-card"><div class="watch-photo"><img src="assets/watch-corey-pereira.webp" alt="Corey Pereira following a tee shot" loading="lazy"><span class="watch-rank">No. 2</span></div><div class="watch-card-copy"><small>In the chase</small><h3>Corey Pereira</h3><p>A winner this season with five top-10s, he begins the week closest to Ponder.</p></div></article>
+          <article class="watch-card"><div class="watch-photo"><img src="assets/watch-etienne-papineau.webp" alt="Étienne Papineau following a golf shot" loading="lazy"><span class="watch-rank">No. 4</span></div><div class="watch-card-copy"><small>Past champion</small><h3>Étienne Papineau</h3><p>The 2023 Uplands champion returns after winning the 2026 Osprey Valley Open.</p></div></article>
+          <article class="watch-card"><div class="watch-photo"><img src="assets/watch-joey-savoie.webp" alt="Joey Savoie following a tee shot" loading="lazy"><span class="watch-rank">No. 9</span></div><div class="watch-card-copy"><small>Canadian contender</small><h3>Joey Savoie</h3><p>The Quebec native owns a 2026 victory and arrives inside the promotion places.</p></div></article>
+          <article class="watch-card"><div class="watch-photo"><img src="assets/watch-daniel-svard.webp" alt="Daniel Svärd following an iron shot" loading="lazy"><span class="watch-rank">No. 17</span></div><div class="watch-card-copy"><small>Rookie winner</small><h3>Daniel Svärd</h3><p>The 23-year-old Swede won the Manitoba Open in his first professional season.</p></div></article>
+          <article class="watch-card"><div class="watch-photo"><img src="assets/watch-lance-simpson.webp" alt="Lance Simpson following a tee shot" loading="lazy"><span class="watch-rank">No. 19</span></div><div class="watch-card-copy"><small>PGA TOUR University</small><h3>Lance Simpson</h3><p>The Tennessee graduate brings three top-10s and one of the Tour’s lowest scoring averages.</p></div></article>
         </div>
         <div class="watch-footer"><p>Points List positions entering tournament week.</p><div class="watch-links"><a href="https://www.pgatour.com/americas/tournaments/2026/digital-commerce-group-open/Y2026007/field" target="_blank" rel="noopener">View full field ↗</a><a href="https://www.pgatour.com/americas/tournaments/2026/digital-commerce-group-open/Y2026007/tee-times" target="_blank" rel="noopener">Find tee times ↗</a></div></div>
       </div>
