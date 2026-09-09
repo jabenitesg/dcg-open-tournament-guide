@@ -1616,6 +1616,7 @@
     .tee-now-clock strong { display: block; color: white; font-size: 22px; line-height: 1.1; font-variant-numeric: tabular-nums; }
     .tee-now-clock span { display: block; margin-top: 5px; color: rgba(255,255,255,.62); font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
     .tee-now-groups { margin-top: 18px; display: grid; gap: 10px; }
+    .tee-now-groups[hidden] { display: none; }
     .tee-group { min-height: 112px; padding: 16px; border: 1px solid rgba(255,255,255,.14); border-radius: 7px; background: rgba(255,255,255,.07); }
     .tee-group[hidden] { display: none; }
     .tee-group-label { display: block; margin-bottom: 10px; color: var(--gold); font-size: 12px; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
@@ -1627,6 +1628,8 @@
     .tee-official-link:hover { background: white; color: var(--forest-deep); }
     .tee-now-message { margin: 18px 0 0; color: rgba(255,255,255,.78); font-size: 16px; line-height: 1.55; }
     .tee-now-message[hidden] { display: none; }
+    .tee-now-card.is-unavailable .tee-now-clock { display: none; }
+    .tee-now-card.is-unavailable .tee-now-message { max-width: 680px; }
 
     /* Legibility refinement for on-course viewing. */
     .compact-letters-head > p,
@@ -2197,12 +2200,12 @@
       } catch (error) {
         setTeeCardState('unavailable');
         teeTimeStatus.textContent = 'Official tee times';
-        teeTimeTitle.textContent = 'Check today’s groupings';
-        teeTimeValue.textContent = 'PGA TOUR';
-        teeTimeRound.textContent = 'Latest official update';
+        teeTimeTitle.textContent = 'Today’s groupings';
+        teeTimeValue.textContent = '';
+        teeTimeRound.textContent = '';
         teeTimeGroups.hidden = true;
         teeTimeMessage.hidden = false;
-        teeTimeMessage.textContent = 'Live groupings could not be loaded. Use the official tee-times link for the latest schedule.';
+        teeTimeMessage.textContent = 'Open the official PGA TOUR schedule for the latest groups and starting times.';
         teeTimeNext.textContent = 'Times and groupings may change.';
       }
     }
