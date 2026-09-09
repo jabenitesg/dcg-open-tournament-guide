@@ -1681,6 +1681,28 @@
       .menu-panel .menu-links a { font-size: 15px; }
     }
 
+    /* Welcome letters: editorial spacing for easier long-form reading. */
+    .letter-toggle-buttons { gap: 12px; }
+    .letter-toggle-panels { margin-top: 16px; }
+    .letter-toggle-panel { padding: 30px 24px; gap: 40px; }
+    .toggle-letter-copy { max-width: 70ch; }
+    .toggle-letter-copy h3 { margin-bottom: 30px; line-height: 1.08; }
+    .toggle-letter-copy > p:not(.letter-section-label) { margin: 0 0 24px; color: #3f4253; font-size: 17px; line-height: 1.82; }
+    .toggle-letter-copy > p:not(.letter-section-label):last-child { margin-bottom: 0; }
+    .toggle-author { padding-top: 30px; border-top: 1px solid rgba(23,24,58,.14); }
+    .toggle-author h4 { margin-top: 20px; font-size: 19px; line-height: 1.25; }
+    .toggle-author > p { font-size: 12px; line-height: 1.55; letter-spacing: .04em; }
+
+    @media (min-width: 720px) {
+      .letter-toggle-panel { padding: 44px; gap: 48px; }
+      .toggle-author { padding: 0 0 0 36px; border-top: 0; border-left: 1px solid rgba(23,24,58,.14); }
+    }
+
+    @media (min-width: 980px) {
+      .letter-toggle-panel { padding: 56px; gap: 70px; }
+      .toggle-letter-copy > p:not(.letter-section-label) { font-size: 18px; line-height: 1.85; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .watch-photo img, .back-to-top, .tee-official-link { transition: none; }
     }
