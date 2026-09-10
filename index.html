@@ -1659,6 +1659,17 @@
     .tee-strip .tee-now-message { margin-top: 10px; color: var(--muted); font-size: 14px; }
     .tee-strip .tee-official-link { border-color: #141939; background: #141939; color: white; }
     .tee-strip .tee-official-link:hover { border-color: var(--blue); background: var(--blue); color: white; }
+    .tee-official-link[hidden], .tee-now-label[hidden], .tee-now-clock[hidden] { display: none !important; }
+    .tee-strip-card.is-course-full, .tee-strip-card.is-round-complete { padding: clamp(30px,5vw,62px) 0; display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 14px 30px; }
+    .tee-strip-card.is-course-full .tee-strip-primary, .tee-strip-card.is-round-complete .tee-strip-primary { grid-column: 1; grid-row: 1; max-width: 1050px; }
+    .tee-strip .tee-strip-card.is-course-full .tee-strip-titleline, .tee-strip .tee-strip-card.is-round-complete .tee-strip-titleline { margin: 0; display: block; }
+    .tee-strip .tee-strip-card.is-course-full .tee-now-title, .tee-strip .tee-strip-card.is-round-complete .tee-now-title { max-width: 1100px; font-size: clamp(2.65rem,7.6vw,6.8rem); line-height: .88; letter-spacing: -.055em; white-space: normal; }
+    .tee-strip .tee-strip-card.is-round-complete .tee-now-message { grid-column: 1; grid-row: 2; margin: 2px 0 0; color: var(--blue); font-size: clamp(1rem,2vw,1.35rem); font-weight: 800; letter-spacing: .015em; }
+    .tee-strip .tee-strip-card.is-course-full .tee-official-link, .tee-strip .tee-strip-card.is-round-complete .tee-official-link { grid-column: 2; grid-row: 1 / span 2; justify-self: end; }
+    @media (max-width: 679px) {
+      .tee-strip-card.is-course-full, .tee-strip-card.is-round-complete { grid-template-columns: 1fr; gap: 20px; }
+      .tee-strip .tee-strip-card.is-course-full .tee-official-link, .tee-strip .tee-strip-card.is-round-complete .tee-official-link { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 0; }
+    }
 
     .live-leaderboard { padding: 60px 0; border-bottom: 1px solid var(--line); background: white; }
     .leaderboard-head { margin-bottom: 24px; display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 14px 24px; }
@@ -1677,7 +1688,8 @@
     .leaderboard-position { font-weight: 850; }
     .leaderboard-player { min-width: 0; }
     .leaderboard-player strong { display: block; overflow: hidden; font-size: 16px; line-height: 1.25; text-overflow: ellipsis; white-space: nowrap; }
-    .leaderboard-player small { color: var(--muted); font-size: 11px; font-weight: 750; letter-spacing: .06em; }
+    .leaderboard-player small { color: var(--muted); font-size: 12px; font-weight: 750; letter-spacing: .06em; }
+    .leaderboard-location { margin-top: 4px; display: block; color: var(--blue); font-size: 12px; font-weight: 850; letter-spacing: .035em; }
     .leaderboard-total { color: var(--blue); font-size: 18px; font-weight: 900; }
     .leaderboard-today, .leaderboard-thru { font-size: 14px; font-weight: 750; }
     .leaderboard-message { margin: 0; padding: 26px 18px; color: var(--muted); font-size: 16px; line-height: 1.55; text-align: center; }
@@ -1890,7 +1902,7 @@
       <div class="wrap">
         <header class="leaderboard-head">
           <div><p class="eyebrow">PGA TOUR Americas</p><h2 id="leaderboard-title">Live leaderboard</h2></div>
-          <p>See who is setting the pace at Uplands, updated from the official tournament leaderboard.</p>
+          <p>See who is setting the pace at Uplands and which hole the leaders are heading to next.</p>
         </header>
         <div class="leaderboard-card" id="leaderboard-card" aria-live="polite">
           <div class="leaderboard-meta">
@@ -1899,12 +1911,12 @@
           </div>
           <div class="leaderboard-table" role="table" aria-label="Top five players">
             <div class="leaderboard-row header" role="row">
-              <span role="columnheader">Pos</span><span class="leaderboard-player" role="columnheader">Player</span><span role="columnheader">Total</span><span role="columnheader">Today</span><span role="columnheader">Thru</span>
+              <span role="columnheader">Pos</span><span class="leaderboard-player" role="columnheader">Player · Next hole</span><span role="columnheader">Total</span><span role="columnheader">Today</span><span role="columnheader">Thru</span>
             </div>
             <div class="leaderboard-rows" id="leaderboard-rows" role="rowgroup" hidden></div>
           </div>
           <p class="leaderboard-message" id="leaderboard-message">Loading the top five players…</p>
-          <div class="leaderboard-foot"><p>Scores are unofficial until confirmed by PGA TOUR.</p><a class="leaderboard-link" href="https://www.pgatour.com/americas/tournaments/2026/digital-commerce-group-open/Y2026007/leaderboard" target="_blank" rel="noopener">Full leaderboard ↗</a></div>
+          <div class="leaderboard-foot"><p>Scores are unofficial; next-hole locations are estimated from official scoring.</p><a class="leaderboard-link" href="https://www.pgatour.com/americas/tournaments/2026/digital-commerce-group-open/Y2026007/leaderboard" target="_blank" rel="noopener">Full leaderboard ↗</a></div>
         </div>
       </div>
     </section>
@@ -2186,8 +2198,22 @@
     const leaderboardRows = document.getElementById('leaderboard-rows');
     const leaderboardMessage = document.getElementById('leaderboard-message');
     const leaderboardTimeFormatter = new Intl.DateTimeFormat('en-CA', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Vancouver' });
+    let latestLeaderboard = null;
+
+    function getLeaderboardLocation(thru) {
+      const progress = String(thru || '').trim();
+      if (!progress || progress === '—' || progress === '-') return '';
+      if (/^F/i.test(progress)) return 'Finished';
+      const holesCompleted = Number.parseInt(progress, 10);
+      if (!Number.isFinite(holesCompleted)) return '';
+      if (holesCompleted >= 18) return 'Finished';
+      const startingHole = progress.includes('*') ? 10 : 1;
+      const nextHole = ((startingHole - 1 + holesCompleted) % 18) + 1;
+      return 'Next · Hole ' + nextHole;
+    }
 
     function renderLeaderboard(data) {
+      latestLeaderboard = data;
       leaderboardRows.replaceChildren();
       data.players.forEach(player => {
         const row = document.createElement('div');
@@ -2206,7 +2232,11 @@
         playerName.textContent = player.name;
         const country = document.createElement('small');
         country.textContent = player.country;
+        const location = document.createElement('span');
+        location.className = 'leaderboard-location';
+        location.textContent = getLeaderboardLocation(player.thru);
         playerCell.append(playerName, country);
+        if (location.textContent) playerCell.appendChild(location);
 
         const total = document.createElement('span');
         total.className = 'leaderboard-total';
@@ -2232,6 +2262,7 @@
       leaderboardUpdated.textContent = Number.isNaN(updated.getTime()) ? 'Official PGA TOUR update' : 'Updated ' + leaderboardTimeFormatter.format(updated);
       leaderboardRows.hidden = false;
       leaderboardMessage.hidden = true;
+      renderTeeTimes();
     }
 
     async function loadLeaderboard() {
@@ -2262,14 +2293,33 @@
     const teeTimeGroups = document.getElementById('tee-now-groups');
     const teeTimeMessage = document.getElementById('tee-now-message');
     const teeTimeNext = document.getElementById('tee-next');
+    const teeTimeLabel = teeTimeCard.querySelector('.tee-now-label');
+    const teeTimeClock = teeTimeCard.querySelector('.tee-now-clock');
+    const teeTimeLink = teeTimeCard.querySelector('.tee-official-link');
+    const officialTeeTimesUrl = teeTimeLink.href;
+    const officialLeaderboardUrl = 'https://www.pgatour.com/americas/tournaments/2026/digital-commerce-group-open/Y2026007/leaderboard';
     let officialTeeTimes = null;
+
+    const roundStartTimes = {
+      2: Date.parse('2026-09-11T14:00:00Z'),
+      3: Date.parse('2026-09-12T14:00:00Z'),
+      4: Date.parse('2026-09-13T14:00:00Z')
+    };
 
     const teeTimeFormatter = new Intl.DateTimeFormat('en-CA', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Vancouver' });
     const teeDateFormatter = new Intl.DateTimeFormat('en-CA', { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'America/Vancouver' });
 
     function setTeeCardState(state) {
-      teeTimeCard.classList.remove('is-loading', 'is-next', 'is-break', 'is-live', 'is-complete', 'is-unavailable');
+      teeTimeCard.classList.remove('is-loading', 'is-next', 'is-break', 'is-live', 'is-complete', 'is-course-full', 'is-round-complete', 'is-unavailable');
       teeTimeCard.classList.add('is-' + state);
+    }
+
+    function restoreTeeCardParts() {
+      teeTimeLabel.hidden = false;
+      teeTimeClock.hidden = false;
+      teeTimeLink.hidden = false;
+      teeTimeLink.href = officialTeeTimesUrl;
+      teeTimeLink.textContent = 'All tee times ↗';
     }
 
     function setTeeGroup(tee, groups, nextGroups = []) {
@@ -2300,8 +2350,53 @@
       return 'Next tee time in ' + duration + '.';
     }
 
+    function formatRoundCountdown(round, milliseconds) {
+      const totalMinutes = Math.max(0, Math.ceil(milliseconds / 60000));
+      const days = Math.floor(totalMinutes / 1440);
+      const hours = Math.floor((totalMinutes % 1440) / 60);
+      const minutes = totalMinutes % 60;
+      const duration = [days ? days + 'd' : '', hours ? hours + 'h' : '', minutes ? minutes + 'm' : ''].filter(Boolean).join(' ');
+      return 'Round ' + round + ' starts in ' + (duration || 'a few moments') + '.';
+    }
+
+    function getCurrentLeaderboardRound() {
+      return Number.parseInt(String(latestLeaderboard?.round || officialTeeTimes?.round || '').replace(/\D/g, ''), 10) || officialTeeTimes?.round || 1;
+    }
+
+    function renderCourseFullState(nowTime) {
+      const round = getCurrentLeaderboardRound();
+      const isRoundComplete = Boolean(latestLeaderboard?.roundComplete);
+      teeTimeGroups.hidden = true;
+      teeTimeLabel.hidden = true;
+      teeTimeClock.hidden = true;
+      teeTimeLink.hidden = false;
+      teeTimeLink.href = officialLeaderboardUrl;
+      teeTimeLink.textContent = 'See full leaderboard ↗';
+      teeTimeNext.parentElement.hidden = true;
+
+      if (isRoundComplete) {
+        setTeeCardState('round-complete');
+        if (round >= 4) {
+          teeTimeTitle.textContent = 'Tournament complete';
+          teeTimeMessage.hidden = true;
+          return;
+        }
+        const nextRound = round + 1;
+        const nextStart = roundStartTimes[nextRound];
+        teeTimeTitle.textContent = 'Round ' + round + ' is complete';
+        teeTimeMessage.hidden = false;
+        teeTimeMessage.textContent = formatRoundCountdown(nextRound, nextStart - nowTime);
+        return;
+      }
+
+      setTeeCardState('course-full');
+      teeTimeTitle.textContent = 'All groups are on the course';
+      teeTimeMessage.hidden = true;
+    }
+
     function renderTeeTimes() {
       if (!officialTeeTimes?.groups?.length) return;
+      restoreTeeCardParts();
       const now = new Date();
       const groups = officialTeeTimes.groups.map(group => ({ ...group, date: new Date(group.timeUtc) })).filter(group => !Number.isNaN(group.date.getTime())).sort((a,b) => a.date - b.date);
       const slots = [...new Set(groups.map(group => group.date.getTime()))];
@@ -2314,21 +2409,17 @@
       let state;
       let breakEndsAt = null;
 
+      if (latestLeaderboard?.roundComplete && Number(officialTeeTimes.round) > getCurrentLeaderboardRound() && nowTime < first) {
+        renderCourseFullState(nowTime);
+        return;
+      }
+
       if (nowTime < first) {
         selectedTime = first;
         slotIndex = 0;
         state = 'next';
       } else if (nowTime > last + 15 * 60 * 1000) {
-        setTeeCardState('complete');
-        teeTimeStatus.textContent = 'Round update';
-        teeTimeTitle.textContent = 'All groups are on the course';
-        teeTimeValue.textContent = teeTimeFormatter.format(new Date(last));
-        teeTimeRound.textContent = 'Round ' + officialTeeTimes.round + ' · Last scheduled start';
-        teeTimeGroups.hidden = true;
-        teeTimeMessage.hidden = false;
-        teeTimeMessage.textContent = 'Follow scoring and player positions on the official leaderboard.';
-        teeTimeNext.parentElement.hidden = false;
-        teeTimeNext.textContent = 'Tee times are scheduled and may be affected by on-course delays.';
+        renderCourseFullState(nowTime);
         return;
       } else {
         selectedTime = slots[Math.max(0, slotIndex)];
@@ -2379,6 +2470,7 @@
         officialTeeTimes = data;
         renderTeeTimes();
       } catch (error) {
+        restoreTeeCardParts();
         setTeeCardState('unavailable');
         teeTimeStatus.textContent = 'Official tee times';
         teeTimeTitle.textContent = 'Today’s groupings';

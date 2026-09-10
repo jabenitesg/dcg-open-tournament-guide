@@ -36,9 +36,17 @@ module.exports = async function handler(request, response) {
       thru: row.scoringData?.thru || '—'
     }));
 
+    const roundPlayers = leaderboard.players.filter(row => row.scoringData);
+    const roundComplete = roundPlayers.length > 0 && roundPlayers.every(row => {
+      const state = String(row.scoringData?.playerState || '').toUpperCase();
+      const thru = String(row.scoringData?.thru || '').toUpperCase();
+      return (state && state !== 'ACTIVE') || thru.startsWith('F') || Number.parseInt(thru, 10) >= 18;
+    });
+
     const updatedMs = Number(query.state.dataUpdatedAt);
     response.status(200).json({
       round: leaderboard.leaderboardRoundHeader || '',
+      roundComplete,
       players,
       source: SOURCE_URL,
       updatedAt: Number.isFinite(updatedMs) ? new Date(updatedMs).toISOString() : new Date().toISOString()
