@@ -2324,9 +2324,8 @@
 
       const nextTime = slots[slotIndex + 1];
       if (nextTime) {
-        const minutes = Math.max(1, Math.ceil((nextTime - nowTime) / 60000));
-        const countdown = minutes <= 90 && minutes > 0 ? ' · in ' + minutes + ' min' : '';
-        teeTimeNext.textContent = 'Up next · ' + formatTeeSlot(new Date(nextTime), teeDateFormatter.format(new Date(nextTime)) !== todayInVictoria) + countdown;
+        const nextNames = groups.filter(group => group.date.getTime() === nextTime).flatMap(group => group.players);
+        teeTimeNext.textContent = nextNames.length ? 'Up next · ' + nextNames.join(' · ') : 'Up next · ' + formatTeeSlot(new Date(nextTime));
       } else {
         teeTimeNext.textContent = 'Final scheduled groups of the day.';
       }
