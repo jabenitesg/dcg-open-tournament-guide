@@ -1622,7 +1622,12 @@
     .tee-group-label { display: block; margin-bottom: 10px; color: var(--gold); font-size: 12px; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
     .tee-group ul { margin: 0; padding: 0; display: grid; gap: 5px; list-style: none; }
     .tee-group li { color: white; font-size: 16px; font-weight: 700; line-height: 1.35; }
+    .tee-group-next { margin-top: 10px; padding-top: 9px; border-top: 1px solid rgba(255,255,255,.14); }
+    .tee-group-next[hidden] { display: none; }
+    .tee-group-next > span { display: block; margin-bottom: 5px; color: rgba(255,255,255,.56); font-size: 10px; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
+    .tee-group .tee-group-next li { color: rgba(255,255,255,.78); font-size: 12px; font-weight: 650; }
     .tee-now-foot { margin-top: 15px; padding-top: 15px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; border-top: 1px solid rgba(255,255,255,.13); }
+    .tee-now-foot[hidden] { display: none; }
     .tee-next { margin: 0; color: rgba(255,255,255,.72); font-size: 14px; line-height: 1.5; }
     .tee-official-link { min-height: 44px; padding: 0 14px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.32); border-radius: 4px; color: white; font-size: 12px; font-weight: 850; letter-spacing: .07em; text-decoration: none; text-transform: uppercase; }
     .tee-official-link:hover { background: white; color: var(--forest-deep); }
@@ -1833,8 +1838,8 @@
             </div>
           </div>
           <div class="tee-now-groups" id="tee-now-groups" hidden>
-            <article class="tee-group" id="tee-group-1"><span class="tee-group-label">Tee No. 1</span><ul></ul></article>
-            <article class="tee-group" id="tee-group-10"><span class="tee-group-label">Tee No. 10</span><ul></ul></article>
+            <article class="tee-group" id="tee-group-1"><span class="tee-group-label">Tee No. 1</span><ul class="tee-group-current"></ul><div class="tee-group-next" hidden><span>Up next</span><ul class="tee-group-next-list"></ul></div></article>
+            <article class="tee-group" id="tee-group-10"><span class="tee-group-label">Tee No. 10</span><ul class="tee-group-current"></ul><div class="tee-group-next" hidden><span>Up next</span><ul class="tee-group-next-list"></ul></div></article>
           </div>
           <p class="tee-now-message" id="tee-now-message">Checking the latest official tee times…</p>
           <a class="tee-official-link" href="https://www.pgatour.com/americas/tournaments/2026/digital-commerce-group-open/Y2026007/tee-times" target="_blank" rel="noopener">All tee times ↗</a>
@@ -2254,14 +2259,20 @@
       teeTimeCard.classList.add('is-' + state);
     }
 
-    function setTeeGroup(tee, groups) {
+    function setTeeGroup(tee, groups, nextGroups = []) {
       const panel = document.getElementById('tee-group-' + tee);
       if (!panel) return;
       const group = groups.find(item => String(item.tee) === String(tee));
+      const nextGroup = nextGroups.find(item => String(item.tee) === String(tee));
       panel.hidden = !group;
-      const list = panel.querySelector('ul');
+      const list = panel.querySelector('.tee-group-current');
       list.replaceChildren();
       if (group) group.players.forEach(player => { const item = document.createElement('li'); item.textContent = player; list.appendChild(item); });
+      const nextPanel = panel.querySelector('.tee-group-next');
+      const nextList = panel.querySelector('.tee-group-next-list');
+      nextList.replaceChildren();
+      nextPanel.hidden = !nextGroup;
+      if (nextGroup) nextGroup.players.forEach(player => { const item = document.createElement('li'); item.textContent = player; nextList.appendChild(item); });
     }
 
     function formatTeeSlot(date, includeDate = false) {
@@ -2294,6 +2305,7 @@
         teeTimeGroups.hidden = true;
         teeTimeMessage.hidden = false;
         teeTimeMessage.textContent = 'Follow scoring and player positions on the official leaderboard.';
+        teeTimeNext.parentElement.hidden = false;
         teeTimeNext.textContent = 'Tee times are scheduled and may be affected by on-course delays.';
         return;
       } else {
@@ -2319,14 +2331,15 @@
       teeTimeRound.textContent = 'Round ' + officialTeeTimes.round + ' · Official groupings';
       teeTimeGroups.hidden = false;
       teeTimeMessage.hidden = true;
-      setTeeGroup(1, selectedGroups);
-      setTeeGroup(10, selectedGroups);
-
       const nextTime = slots[slotIndex + 1];
+      const nextGroups = nextTime ? groups.filter(group => group.date.getTime() === nextTime) : [];
+      setTeeGroup(1, selectedGroups, nextGroups);
+      setTeeGroup(10, selectedGroups, nextGroups);
+
       if (nextTime) {
-        const nextNames = groups.filter(group => group.date.getTime() === nextTime).flatMap(group => group.players);
-        teeTimeNext.textContent = nextNames.length ? 'Up next · ' + nextNames.join(' · ') : 'Up next · ' + formatTeeSlot(new Date(nextTime));
+        teeTimeNext.parentElement.hidden = true;
       } else {
+        teeTimeNext.parentElement.hidden = false;
         teeTimeNext.textContent = 'Final scheduled groups of the day.';
       }
     }
@@ -2348,6 +2361,7 @@
         teeTimeGroups.hidden = true;
         teeTimeMessage.hidden = false;
         teeTimeMessage.textContent = 'Open the official PGA TOUR schedule for the latest groups and starting times.';
+        teeTimeNext.parentElement.hidden = false;
         teeTimeNext.textContent = 'Times and groupings may change.';
       }
     }
