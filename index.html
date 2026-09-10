@@ -1609,7 +1609,7 @@
     .tee-now-heading { display: grid; gap: 5px; }
     .tee-now-label { display: flex; align-items: center; gap: 8px; color: var(--gold); font-size: 12px; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
     .tee-live-dot { width: 8px; height: 8px; flex: 0 0 auto; border-radius: 50%; background: #71e0a3; box-shadow: 0 0 0 5px rgba(113,224,163,.12); }
-    .tee-now-card.is-next .tee-live-dot, .tee-now-card.is-loading .tee-live-dot { background: var(--gold); box-shadow: 0 0 0 5px rgba(195,165,112,.13); }
+    .tee-now-card.is-next .tee-live-dot, .tee-now-card.is-break .tee-live-dot, .tee-now-card.is-loading .tee-live-dot { background: var(--gold); box-shadow: 0 0 0 5px rgba(195,165,112,.13); }
     .tee-now-card.is-complete .tee-live-dot, .tee-now-card.is-unavailable .tee-live-dot { background: #8e96b6; box-shadow: none; }
     .tee-now-title { margin: 0; color: white; font: 600 32px/.95 "Warbler Banner", Georgia, serif; letter-spacing: -.035em; }
     .tee-now-clock { min-width: 150px; text-align: left; }
@@ -2268,7 +2268,7 @@
     const teeDateFormatter = new Intl.DateTimeFormat('en-CA', { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'America/Vancouver' });
 
     function setTeeCardState(state) {
-      teeTimeCard.classList.remove('is-loading', 'is-next', 'is-live', 'is-complete', 'is-unavailable');
+      teeTimeCard.classList.remove('is-loading', 'is-next', 'is-break', 'is-live', 'is-complete', 'is-unavailable');
       teeTimeCard.classList.add('is-' + state);
     }
 
@@ -2292,6 +2292,14 @@
       return (includeDate ? teeDateFormatter.format(date) + ' · ' : '') + teeTimeFormatter.format(date);
     }
 
+    function formatTeeCountdown(milliseconds) {
+      const totalMinutes = Math.max(1, Math.ceil(milliseconds / 60000));
+      const hours = Math.floor(totalMinutes / 60);
+      const minutes = totalMinutes % 60;
+      const duration = [hours ? hours + 'h' : '', minutes ? minutes + 'm' : ''].filter(Boolean).join(' ');
+      return 'Next tee time in ' + duration + '.';
+    }
+
     function renderTeeTimes() {
       if (!officialTeeTimes?.groups?.length) return;
       const now = new Date();
@@ -2304,6 +2312,7 @@
       let slotIndex = slots.findLastIndex(slot => slot <= nowTime);
       let selectedTime;
       let state;
+      let breakEndsAt = null;
 
       if (nowTime < first) {
         selectedTime = first;
@@ -2325,9 +2334,10 @@
         selectedTime = slots[Math.max(0, slotIndex)];
         const followingTime = slots[slotIndex + 1];
         if (followingTime && nowTime - selectedTime > 15 * 60 * 1000) {
+          if (followingTime - selectedTime >= 45 * 60 * 1000 && nowTime < followingTime) breakEndsAt = followingTime;
           selectedTime = followingTime;
           slotIndex += 1;
-          state = 'next';
+          state = breakEndsAt ? 'break' : 'next';
         } else {
           state = 'live';
         }
@@ -2338,10 +2348,10 @@
       const todayInVictoria = teeDateFormatter.format(now);
       const includeDate = teeDateFormatter.format(selectedDate) !== todayInVictoria;
       setTeeCardState(state);
-      teeTimeStatus.textContent = state === 'live' ? 'Scheduled on the tee now' : 'Next on the tee';
-      teeTimeTitle.textContent = state === 'live' ? 'On the tee' : 'Coming up';
+      teeTimeStatus.textContent = state === 'live' ? 'Scheduled on the tee now' : state === 'break' ? 'Morning wave complete' : 'Next on the tee';
+      teeTimeTitle.textContent = state === 'live' ? 'On the tee' : state === 'break' ? 'Afternoon wave' : 'Coming up';
       teeTimeValue.textContent = formatTeeSlot(selectedDate, includeDate);
-      teeTimeRound.textContent = 'Round ' + officialTeeTimes.round + ' · Official groupings';
+      teeTimeRound.textContent = state === 'break' ? 'Round ' + officialTeeTimes.round + ' · Next groups from Tee Nos. 1 & 10' : 'Round ' + officialTeeTimes.round + ' · Official groupings';
       teeTimeGroups.hidden = false;
       teeTimeMessage.hidden = true;
       const nextTime = slots[slotIndex + 1];
@@ -2349,7 +2359,10 @@
       setTeeGroup(1, selectedGroups, nextGroups);
       setTeeGroup(10, selectedGroups, nextGroups);
 
-      if (nextTime) {
+      if (state === 'break') {
+        teeTimeNext.parentElement.hidden = false;
+        teeTimeNext.textContent = formatTeeCountdown(breakEndsAt - nowTime);
+      } else if (nextTime) {
         teeTimeNext.parentElement.hidden = true;
       } else {
         teeTimeNext.parentElement.hidden = false;
