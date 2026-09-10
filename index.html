@@ -1603,7 +1603,7 @@
     .back-to-top:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
     @media (min-width: 980px) { .back-to-top { bottom: 28px; } }
 
-    .tee-now { padding: 20px 0; border-bottom: 1px solid var(--line); background: white; }
+    .tee-strip { padding: 70px 0 0; border-bottom: 1px solid rgba(255,255,255,.12); background: #0E0E31; }
     .tee-now-card { padding: 20px; overflow: hidden; border: 1px solid rgba(0,70,194,.18); border-radius: 10px; background: linear-gradient(135deg,#0E0E31,#18285f); color: white; box-shadow: 0 18px 42px rgba(14,14,49,.14); }
     .tee-now-head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 14px 24px; }
     .tee-now-heading { display: grid; gap: 5px; }
@@ -1630,6 +1630,48 @@
     .tee-now-message[hidden] { display: none; }
     .tee-now-card.is-unavailable .tee-now-clock { display: none; }
     .tee-now-card.is-unavailable .tee-now-message { max-width: 680px; }
+
+    .tee-strip-card { padding: 16px 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+    .tee-strip-primary { min-width: 0; }
+    .tee-strip-titleline { margin-top: 7px; display: flex; align-items: baseline; justify-content: space-between; gap: 14px; }
+    .tee-strip .tee-now-title { font-size: 27px; white-space: nowrap; }
+    .tee-strip .tee-now-clock { min-width: 0; text-align: right; }
+    .tee-strip .tee-now-clock strong { font-size: 17px; }
+    .tee-strip .tee-now-clock span { font-size: 10px; }
+    .tee-strip .tee-now-groups { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+    .tee-strip .tee-group { min-height: 0; padding: 12px 13px; }
+    .tee-strip .tee-group-label { margin-bottom: 6px; font-size: 10px; }
+    .tee-strip .tee-group li { font-size: 14px; line-height: 1.35; }
+    .tee-strip .tee-now-foot { margin-top: 12px; padding-top: 12px; }
+    .tee-strip .tee-next { font-size: 12px; }
+    .tee-strip .tee-now-message { margin-top: 10px; font-size: 14px; }
+
+    .live-leaderboard { padding: 60px 0; border-bottom: 1px solid var(--line); background: white; }
+    .leaderboard-head { margin-bottom: 24px; display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 14px 24px; }
+    .leaderboard-head .eyebrow { margin-bottom: 7px; color: var(--blue); }
+    .leaderboard-head h2 { margin: 0; font: 600 clamp(2.7rem,10vw,4.8rem)/.9 "Warbler Banner", Georgia, serif; letter-spacing: -.045em; }
+    .leaderboard-head > p { max-width: 470px; margin: 0; color: var(--muted); font-size: 16px; line-height: 1.55; }
+    .leaderboard-card { overflow: hidden; border: 1px solid rgba(23,24,58,.14); border-radius: 10px; background: #fff; box-shadow: 0 18px 42px rgba(14,14,49,.09); }
+    .leaderboard-meta { min-height: 56px; padding: 12px 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 18px; background: #141939; color: white; }
+    .leaderboard-live-label { display: inline-flex; align-items: center; gap: 9px; color: var(--gold); font-size: 13px; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
+    .leaderboard-live-label::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #71e0a3; box-shadow: 0 0 0 5px rgba(113,224,163,.13); }
+    .leaderboard-updated { color: rgba(255,255,255,.68); font-size: 13px; }
+    .leaderboard-table { width: 100%; }
+    .leaderboard-row { min-height: 63px; padding: 0 16px; display: grid; grid-template-columns: 44px minmax(0,1fr) 50px 50px 50px; gap: 8px; align-items: center; border-top: 1px solid rgba(23,24,58,.1); }
+    .leaderboard-row.header { min-height: 43px; border-top: 0; background: #f3f1f7; color: var(--muted); font-size: 11px; font-weight: 850; letter-spacing: .07em; text-transform: uppercase; }
+    .leaderboard-row > :not(.leaderboard-player) { text-align: center; font-variant-numeric: tabular-nums; }
+    .leaderboard-position { font-weight: 850; }
+    .leaderboard-player { min-width: 0; }
+    .leaderboard-player strong { display: block; overflow: hidden; font-size: 16px; line-height: 1.25; text-overflow: ellipsis; white-space: nowrap; }
+    .leaderboard-player small { color: var(--muted); font-size: 11px; font-weight: 750; letter-spacing: .06em; }
+    .leaderboard-total { color: var(--blue); font-size: 18px; font-weight: 900; }
+    .leaderboard-today, .leaderboard-thru { font-size: 14px; font-weight: 750; }
+    .leaderboard-message { margin: 0; padding: 26px 18px; color: var(--muted); font-size: 16px; line-height: 1.55; text-align: center; }
+    .leaderboard-message[hidden], .leaderboard-rows[hidden] { display: none; }
+    .leaderboard-foot { padding: 14px 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 18px; border-top: 1px solid rgba(23,24,58,.1); }
+    .leaderboard-foot p { margin: 0; color: var(--muted); font-size: 13px; }
+    .leaderboard-link { min-height: 44px; padding: 0 15px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid #141939; border-radius: 4px; background: #141939; color: white; font-size: 12px; font-weight: 850; letter-spacing: .07em; text-decoration: none; text-transform: uppercase; }
+    .leaderboard-link:hover { background: white; color: #141939; }
 
     /* Legibility refinement for on-course viewing. */
     .compact-letters-head > p,
@@ -1673,11 +1715,15 @@
     .bottom-nav a { font-size: 11px; }
 
     @media (min-width: 680px) {
-      .tee-now { padding: 24px 0; }
-      .tee-now-card { padding: 24px; }
-      .tee-now-groups { grid-template-columns: repeat(2,minmax(0,1fr)); }
-      .tee-now-clock { text-align: right; }
+      .tee-strip-card { display: grid; grid-template-columns: minmax(180px,.72fr) minmax(360px,1.5fr) auto; align-items: center; gap: 12px 24px; }
+      .tee-strip .tee-now-groups { grid-column: 2; grid-row: 1; margin: 0; }
+      .tee-strip .tee-now-message { grid-column: 2; grid-row: 1; margin: 0; }
+      .tee-strip .tee-official-link { grid-column: 3; grid-row: 1; }
+      .tee-strip .tee-now-foot { grid-column: 1 / -1; margin: 0; padding-top: 8px; }
+      .leaderboard-row { padding-inline: 24px; grid-template-columns: 56px minmax(0,1fr) 72px 72px 72px; }
     }
+
+    @media (min-width: 980px) { .tee-strip { padding-top: 78px; } }
 
     @media (max-width: 759px) {
       .hero .quick-action strong { font-size: 14px; }
@@ -1776,6 +1822,27 @@
   </nav>
 
   <main id="main">
+    <section class="tee-strip" id="on-the-tee" aria-labelledby="tee-now-title">
+      <div class="wrap">
+        <div class="tee-now-card tee-strip-card is-loading" id="tee-now-card" aria-live="polite">
+          <div class="tee-strip-primary">
+            <span class="tee-now-label"><span class="tee-live-dot" aria-hidden="true"></span><span id="tee-now-status">Loading official groupings</span></span>
+            <div class="tee-strip-titleline">
+              <h2 class="tee-now-title" id="tee-now-title">On the tee</h2>
+              <div class="tee-now-clock"><strong id="tee-now-time">—</strong><span id="tee-now-round">PGA TOUR Americas</span></div>
+            </div>
+          </div>
+          <div class="tee-now-groups" id="tee-now-groups" hidden>
+            <article class="tee-group" id="tee-group-1"><span class="tee-group-label">Tee No. 1</span><ul></ul></article>
+            <article class="tee-group" id="tee-group-10"><span class="tee-group-label">Tee No. 10</span><ul></ul></article>
+          </div>
+          <p class="tee-now-message" id="tee-now-message">Checking the latest official tee times…</p>
+          <a class="tee-official-link" href="https://www.pgatour.com/americas/tournaments/2026/digital-commerce-group-open/Y2026007/tee-times" target="_blank" rel="noopener">All tee times ↗</a>
+          <div class="tee-now-foot"><p class="tee-next" id="tee-next">Times shown in Victoria local time.</p></div>
+        </div>
+      </div>
+    </section>
+
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="wrap hero-inner">
         <div class="hero-copy">
@@ -1801,22 +1868,25 @@
       </div>
     </section>
 
-    <section class="tee-now" id="on-the-tee" aria-labelledby="tee-now-title">
+    <section class="live-leaderboard" id="live-leaderboard" aria-labelledby="leaderboard-title">
       <div class="wrap">
-        <div class="tee-now-card is-loading" id="tee-now-card" aria-live="polite">
-          <div class="tee-now-head">
-            <div class="tee-now-heading">
-              <span class="tee-now-label"><span class="tee-live-dot" aria-hidden="true"></span><span id="tee-now-status">Loading official groupings</span></span>
-              <h2 class="tee-now-title" id="tee-now-title">On the tee</h2>
+        <header class="leaderboard-head">
+          <div><p class="eyebrow">PGA TOUR Americas</p><h2 id="leaderboard-title">Live leaderboard</h2></div>
+          <p>See who is setting the pace at Uplands, updated from the official tournament leaderboard.</p>
+        </header>
+        <div class="leaderboard-card" id="leaderboard-card" aria-live="polite">
+          <div class="leaderboard-meta">
+            <span class="leaderboard-live-label" id="leaderboard-status">Loading live scores</span>
+            <span class="leaderboard-updated" id="leaderboard-updated">Connecting to PGA TOUR…</span>
+          </div>
+          <div class="leaderboard-table" role="table" aria-label="Top five players">
+            <div class="leaderboard-row header" role="row">
+              <span role="columnheader">Pos</span><span class="leaderboard-player" role="columnheader">Player</span><span role="columnheader">Total</span><span role="columnheader">Today</span><span role="columnheader">Thru</span>
             </div>
-            <div class="tee-now-clock"><strong id="tee-now-time">—</strong><span id="tee-now-round">PGA TOUR Americas</span></div>
+            <div class="leaderboard-rows" id="leaderboard-rows" role="rowgroup" hidden></div>
           </div>
-          <div class="tee-now-groups" id="tee-now-groups" hidden>
-            <article class="tee-group" id="tee-group-1"><span class="tee-group-label">Tee No. 1</span><ul></ul></article>
-            <article class="tee-group" id="tee-group-10"><span class="tee-group-label">Tee No. 10</span><ul></ul></article>
-          </div>
-          <p class="tee-now-message" id="tee-now-message">Checking the latest official tee times…</p>
-          <div class="tee-now-foot"><p class="tee-next" id="tee-next">Times shown in Victoria local time.</p><a class="tee-official-link" href="https://www.pgatour.com/americas/tournaments/2026/digital-commerce-group-open/Y2026007/tee-times" target="_blank" rel="noopener">All tee times ↗</a></div>
+          <p class="leaderboard-message" id="leaderboard-message">Loading the top five players…</p>
+          <div class="leaderboard-foot"><p>Scores are unofficial until confirmed by PGA TOUR.</p><a class="leaderboard-link" href="https://www.pgatour.com/americas/tournaments/2026/digital-commerce-group-open/Y2026007/leaderboard" target="_blank" rel="noopener">Full leaderboard ↗</a></div>
         </div>
       </div>
     </section>
@@ -2092,6 +2162,79 @@
   <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top" aria-hidden="true" tabindex="-1"><i class="ph ph-arrow-up" aria-hidden="true"></i></button>
 
   <script>
+    const leaderboardEndpoint = '/api/leaderboard';
+    const leaderboardStatus = document.getElementById('leaderboard-status');
+    const leaderboardUpdated = document.getElementById('leaderboard-updated');
+    const leaderboardRows = document.getElementById('leaderboard-rows');
+    const leaderboardMessage = document.getElementById('leaderboard-message');
+    const leaderboardTimeFormatter = new Intl.DateTimeFormat('en-CA', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Vancouver' });
+
+    function renderLeaderboard(data) {
+      leaderboardRows.replaceChildren();
+      data.players.forEach(player => {
+        const row = document.createElement('div');
+        row.className = 'leaderboard-row';
+        row.setAttribute('role', 'row');
+
+        const position = document.createElement('span');
+        position.className = 'leaderboard-position';
+        position.setAttribute('role', 'cell');
+        position.textContent = player.position;
+
+        const playerCell = document.createElement('span');
+        playerCell.className = 'leaderboard-player';
+        playerCell.setAttribute('role', 'cell');
+        const playerName = document.createElement('strong');
+        playerName.textContent = player.name;
+        const country = document.createElement('small');
+        country.textContent = player.country;
+        playerCell.append(playerName, country);
+
+        const total = document.createElement('span');
+        total.className = 'leaderboard-total';
+        total.setAttribute('role', 'cell');
+        total.textContent = player.total;
+
+        const today = document.createElement('span');
+        today.className = 'leaderboard-today';
+        today.setAttribute('role', 'cell');
+        today.textContent = player.today;
+
+        const thru = document.createElement('span');
+        thru.className = 'leaderboard-thru';
+        thru.setAttribute('role', 'cell');
+        thru.textContent = player.thru;
+
+        row.append(position, playerCell, total, today, thru);
+        leaderboardRows.appendChild(row);
+      });
+
+      leaderboardStatus.textContent = 'Live · ' + (data.round || 'Official scores');
+      const updated = new Date(data.updatedAt);
+      leaderboardUpdated.textContent = Number.isNaN(updated.getTime()) ? 'Official PGA TOUR update' : 'Updated ' + leaderboardTimeFormatter.format(updated);
+      leaderboardRows.hidden = false;
+      leaderboardMessage.hidden = true;
+    }
+
+    async function loadLeaderboard() {
+      try {
+        const response = await fetch(leaderboardEndpoint, { headers: { accept: 'application/json' } });
+        if (!response.ok) throw new Error('Leaderboard unavailable');
+        const data = await response.json();
+        if (!data.players?.length) throw new Error('No leaderboard players available');
+        renderLeaderboard(data);
+      } catch (error) {
+        leaderboardStatus.textContent = 'Official leaderboard';
+        leaderboardUpdated.textContent = 'Latest scores on PGA TOUR';
+        leaderboardRows.hidden = true;
+        leaderboardMessage.hidden = false;
+        leaderboardMessage.textContent = 'Live scores could not be loaded. Open the full leaderboard for the latest official standings.';
+      }
+    }
+
+    loadLeaderboard();
+    setInterval(loadLeaderboard, 60000);
+
     const teeTimesEndpoint = '/api/tee-times';
     const teeTimeCard = document.getElementById('tee-now-card');
     const teeTimeStatus = document.getElementById('tee-now-status');
