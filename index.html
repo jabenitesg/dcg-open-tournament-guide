@@ -2413,7 +2413,8 @@
       let state;
       let breakEndsAt = null;
 
-      if (latestLeaderboard?.roundComplete && Number(officialTeeTimes.round) > getCurrentLeaderboardRound() && nowTime < first) {
+      const firstGroupPreviewTime = first - 10 * 60 * 1000;
+      if (latestLeaderboard?.roundComplete && Number(officialTeeTimes.round) > getCurrentLeaderboardRound() && nowTime < firstGroupPreviewTime) {
         renderCourseFullState(nowTime);
         return;
       }
