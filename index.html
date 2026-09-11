@@ -2308,6 +2308,7 @@
 
     const teeTimeFormatter = new Intl.DateTimeFormat('en-CA', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Vancouver' });
     const teeDateFormatter = new Intl.DateTimeFormat('en-CA', { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'America/Vancouver' });
+    const teeRoundDayFormatter = new Intl.DateTimeFormat('en-CA', { weekday: 'long', timeZone: 'America/Vancouver' });
 
     function setTeeCardState(state) {
       teeTimeCard.classList.remove('is-loading', 'is-next', 'is-break', 'is-live', 'is-complete', 'is-course-full', 'is-round-complete', 'is-unavailable');
@@ -2350,13 +2351,16 @@
       return 'Next tee time in ' + duration + '.';
     }
 
-    function formatRoundCountdown(round, milliseconds) {
+    function formatRoundCountdown(round, startTime, nowTime) {
+      const milliseconds = startTime - nowTime;
       const totalMinutes = Math.max(0, Math.ceil(milliseconds / 60000));
       const days = Math.floor(totalMinutes / 1440);
       const hours = Math.floor((totalMinutes % 1440) / 60);
       const minutes = totalMinutes % 60;
       const duration = [days ? days + 'd' : '', hours ? hours + 'h' : '', minutes ? minutes + 'm' : ''].filter(Boolean).join(' ');
-      return 'Round ' + round + ' starts in ' + (duration || 'a few moments') + '.';
+      const start = new Date(startTime);
+      const countdown = duration ? duration + ' to go' : 'starting shortly';
+      return 'Round ' + round + ' tee times begin ' + teeRoundDayFormatter.format(start) + ' at ' + teeTimeFormatter.format(start) + ' · ' + countdown + '.';
     }
 
     function getCurrentLeaderboardRound() {
@@ -2385,7 +2389,7 @@
         const nextStart = roundStartTimes[nextRound];
         teeTimeTitle.textContent = 'Round ' + round + ' is complete';
         teeTimeMessage.hidden = false;
-        teeTimeMessage.textContent = formatRoundCountdown(nextRound, nextStart - nowTime);
+        teeTimeMessage.textContent = formatRoundCountdown(nextRound, nextStart, nowTime);
         return;
       }
 
