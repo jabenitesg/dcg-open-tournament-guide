@@ -5,6 +5,21 @@ function findLeaderboardData(nextData) {
   return queries.find(query => query?.state?.data?.__typename === 'LeaderboardV3');
 }
 
+function getRoundNumber(leaderboard) {
+  return Number.parseInt(String(leaderboard?.leaderboardRoundHeader || '').replace(/\D/g, ''), 10) || 0;
+}
+
+function hasCompletedRound(row, roundNumber) {
+  const scoring = row?.scoringData;
+  if (!scoring) return true;
+  const state = String(scoring.playerState || '').toUpperCase();
+  const thru = String(scoring.thru || '').toUpperCase();
+  const roundScore = scoring.rounds?.[roundNumber - 1];
+  if (/WITHDRAW|DISQUAL|CUT|\bWD\b|\bDQ\b/.test(state)) return true;
+  if (thru.startsWith('F') || Number.parseInt(thru, 10) >= 18) return true;
+  return roundScore !== undefined && roundScore !== null && roundScore !== '' && roundScore !== '-';
+}
+
 module.exports = async function handler(request, response) {
   response.setHeader('Content-Type', 'application/json; charset=utf-8');
   response.setHeader('Cache-Control', 's-maxage=30, stale-while-revalidate=90');
@@ -36,17 +51,21 @@ module.exports = async function handler(request, response) {
       thru: row.scoringData?.thru || '—'
     }));
 
+    const roundNumber = getRoundNumber(leaderboard);
     const roundPlayers = leaderboard.players.filter(row => row.scoringData);
-    const roundComplete = roundPlayers.length > 0 && roundPlayers.every(row => {
-      const state = String(row.scoringData?.playerState || '').toUpperCase();
-      const thru = String(row.scoringData?.thru || '').toUpperCase();
-      return (state && state !== 'ACTIVE') || thru.startsWith('F') || Number.parseInt(thru, 10) >= 18;
-    });
+    const roundComplete = roundPlayers.length > 0 && roundNumber > 0 && roundPlayers.every(row => hasCompletedRound(row, roundNumber));
+    const rankedPlayers = leaderboard.players.filter(row => row.scoringData?.total && !/WD|DQ/i.test(String(row.scoringData?.position || '')));
+    const cutBoundary = roundNumber === 2 && rankedPlayers.length >= 60 ? rankedPlayers[59] : null;
+    const cut = cutBoundary ? {
+      score: cutBoundary.scoringData.total,
+      status: roundComplete ? 'official' : 'projected'
+    } : null;
 
     const updatedMs = Number(query.state.dataUpdatedAt);
     response.status(200).json({
       round: leaderboard.leaderboardRoundHeader || '',
       roundComplete,
+      cut,
       players,
       source: SOURCE_URL,
       updatedAt: Number.isFinite(updatedMs) ? new Date(updatedMs).toISOString() : new Date().toISOString()

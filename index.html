@@ -1681,6 +1681,12 @@
     .leaderboard-live-label { display: inline-flex; align-items: center; gap: 9px; color: var(--gold); font-size: 13px; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
     .leaderboard-live-label::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #71e0a3; box-shadow: 0 0 0 5px rgba(113,224,163,.13); }
     .leaderboard-updated { color: rgba(255,255,255,.68); font-size: 13px; }
+    .leaderboard-cut { min-height: 64px; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; border-bottom: 1px solid rgba(23,24,58,.12); background: #f4ecd9; color: #141939; }
+    .leaderboard-cut[hidden] { display: none; }
+    .leaderboard-cut-copy { display: flex; align-items: baseline; gap: 12px; }
+    .leaderboard-cut-label { color: var(--blue); font-size: 13px; font-weight: 850; letter-spacing: .09em; text-transform: uppercase; }
+    .leaderboard-cut-score { font-size: 28px; font-weight: 900; font-variant-numeric: tabular-nums; }
+    .leaderboard-cut-note { color: var(--muted); font-size: 14px; font-weight: 650; }
     .leaderboard-table { width: 100%; }
     .leaderboard-row { min-height: 63px; padding: 0 16px; display: grid; grid-template-columns: 44px minmax(0,1fr) 50px 50px 50px; gap: 8px; align-items: center; border-top: 1px solid rgba(23,24,58,.1); }
     .leaderboard-row.header { min-height: 43px; border-top: 0; background: #f3f1f7; color: var(--muted); font-size: 11px; font-weight: 850; letter-spacing: .07em; text-transform: uppercase; }
@@ -1751,6 +1757,7 @@
 
     @media (max-width: 679px) {
       .tee-strip .tee-official-link { margin-top: 18px; min-height: 48px; padding-inline: 20px; letter-spacing: .09em; }
+      .leaderboard-cut { align-items: flex-start; flex-direction: column; gap: 2px; }
     }
 
     @media (min-width: 980px) { .tee-strip { padding-top: 78px; } }
@@ -1908,6 +1915,10 @@
           <div class="leaderboard-meta">
             <span class="leaderboard-live-label" id="leaderboard-status">Loading live scores</span>
             <span class="leaderboard-updated" id="leaderboard-updated">Connecting to PGA TOUR…</span>
+          </div>
+          <div class="leaderboard-cut" id="leaderboard-cut" hidden>
+            <div class="leaderboard-cut-copy"><span class="leaderboard-cut-label" id="leaderboard-cut-label">Projected cut</span><strong class="leaderboard-cut-score" id="leaderboard-cut-score">—</strong></div>
+            <span class="leaderboard-cut-note">Top 60 &amp; ties advance</span>
           </div>
           <div class="leaderboard-table" role="table" aria-label="Top five players">
             <div class="leaderboard-row header" role="row">
@@ -2197,6 +2208,9 @@
     const leaderboardUpdated = document.getElementById('leaderboard-updated');
     const leaderboardRows = document.getElementById('leaderboard-rows');
     const leaderboardMessage = document.getElementById('leaderboard-message');
+    const leaderboardCut = document.getElementById('leaderboard-cut');
+    const leaderboardCutLabel = document.getElementById('leaderboard-cut-label');
+    const leaderboardCutScore = document.getElementById('leaderboard-cut-score');
     const leaderboardTimeFormatter = new Intl.DateTimeFormat('en-CA', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Vancouver' });
     let latestLeaderboard = null;
 
@@ -2260,6 +2274,13 @@
       leaderboardStatus.textContent = 'Live · ' + (data.round || 'Official scores');
       const updated = new Date(data.updatedAt);
       leaderboardUpdated.textContent = Number.isNaN(updated.getTime()) ? 'Official PGA TOUR update' : 'Updated ' + leaderboardTimeFormatter.format(updated);
+      if (data.cut?.score && /^R?2$/i.test(String(data.round || ''))) {
+        leaderboardCutLabel.textContent = data.cut.status === 'official' ? 'Official cut' : 'Projected cut';
+        leaderboardCutScore.textContent = data.cut.score;
+        leaderboardCut.hidden = false;
+      } else {
+        leaderboardCut.hidden = true;
+      }
       leaderboardRows.hidden = false;
       leaderboardMessage.hidden = true;
       renderTeeTimes();
@@ -2276,6 +2297,7 @@
         leaderboardStatus.textContent = 'Official leaderboard';
         leaderboardUpdated.textContent = 'Latest scores on PGA TOUR';
         leaderboardRows.hidden = true;
+        leaderboardCut.hidden = true;
         leaderboardMessage.hidden = false;
         leaderboardMessage.textContent = 'Live scores could not be loaded. Open the full leaderboard for the latest official standings.';
       }
