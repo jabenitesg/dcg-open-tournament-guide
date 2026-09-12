@@ -1750,6 +1750,10 @@
       .tee-strip-card { display: grid; grid-template-columns: minmax(180px,.72fr) minmax(360px,1.5fr) auto; align-items: center; gap: 12px 24px; }
       .tee-strip .tee-now-groups { grid-column: 2; grid-row: 1; grid-template-columns: repeat(2,minmax(0,1fr)); margin: 0; }
       .tee-strip .tee-now-groups.is-single-tee { grid-template-columns: minmax(0,1fr); }
+      .tee-strip .tee-now-groups.is-single-tee .tee-group:not([hidden]) { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); column-gap: 24px; }
+      .tee-strip .tee-now-groups.is-single-tee .tee-group-label { grid-column: 1; grid-row: 1; }
+      .tee-strip .tee-now-groups.is-single-tee .tee-group-current { grid-column: 1; grid-row: 2; }
+      .tee-strip .tee-now-groups.is-single-tee .tee-group-next { grid-column: 2; grid-row: 1 / span 2; margin: 0; padding: 0 0 0 24px; border-top: 0; border-left: 1px solid var(--line); }
       .tee-strip .tee-now-message { grid-column: 2; grid-row: 1; margin: 0; }
       .tee-strip .tee-official-link { grid-column: 3; grid-row: 1; }
       .tee-strip .tee-now-foot { grid-column: 1 / -1; margin: 0; padding-top: 8px; }
