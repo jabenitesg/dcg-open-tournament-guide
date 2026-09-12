@@ -22,6 +22,23 @@ function normalizeGroups(rows, round) {
 }
 
 function parseOfficialPage(html) {
+  try {
+    const nextDataMatch = html.match(/<script id="__NEXT_DATA__" type="application\/json">([\s\S]*?)<\/script>/);
+    const nextData = nextDataMatch ? JSON.parse(nextDataMatch[1]) : null;
+    const queries = nextData?.props?.pageProps?.dehydratedState?.queries || [];
+    const teeTimes = queries.find(query => query?.state?.data?.__typename === 'TeeTimesV2')?.state?.data;
+    const round = Number(teeTimes?.defaultRound);
+    const roundData = teeTimes?.rounds?.find(item => Number(item.roundInt) === round);
+    const groups = (roundData?.groups || []).map(group => ({
+      timeUtc: new Date(Number(group.teeTime)).toISOString(),
+      tee: String(group.startTee),
+      players: (group.players || []).map(player => player.displayName).filter(Boolean)
+    })).filter(group => group.players.length && !Number.isNaN(new Date(group.timeUtc).getTime()));
+    if (round && groups.length) return { round, groups };
+  } catch (error) {
+    // Fall through to the rendered-page parser when structured data is unavailable.
+  }
+
   const rowMatches = [...html.matchAll(/<tr class="group-\d+-(\d+)[^"]*"[\s\S]*?<\/tr>/g)];
   if (!rowMatches.length) return null;
   const round = Number(rowMatches[0][1]);
@@ -30,7 +47,7 @@ function parseOfficialPage(html) {
     const time = row.match(/>(\d{1,2}:\d{2}\s*(?:AM|PM))<\/span>/i)?.[1];
     const tee = row.match(/<p class="chakra-text css-0">(\d+)<\/p>/)?.[1];
     const players = [...row.matchAll(/<img[^>]+alt="([^"]+)"[^>]*class="chakra-avatar__img/g)].map(player => decodeEntities(player[1]));
-    return time && tee && players.length === 3 ? [time, tee, players] : null;
+    return time && tee && players.length ? [time, tee, players] : null;
   }).filter(Boolean);
   return rows.length ? { round, groups: normalizeGroups(rows, round) } : null;
 }

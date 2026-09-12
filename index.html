@@ -1749,6 +1749,7 @@
     @media (min-width: 680px) {
       .tee-strip-card { display: grid; grid-template-columns: minmax(180px,.72fr) minmax(360px,1.5fr) auto; align-items: center; gap: 12px 24px; }
       .tee-strip .tee-now-groups { grid-column: 2; grid-row: 1; grid-template-columns: repeat(2,minmax(0,1fr)); margin: 0; }
+      .tee-strip .tee-now-groups.is-single-tee { grid-template-columns: minmax(0,1fr); }
       .tee-strip .tee-now-message { grid-column: 2; grid-row: 1; margin: 0; }
       .tee-strip .tee-official-link { grid-column: 3; grid-row: 1; }
       .tee-strip .tee-now-foot { grid-column: 1 / -1; margin: 0; padding-top: 8px; }
@@ -2427,6 +2428,8 @@
       const groups = officialTeeTimes.groups.map(group => ({ ...group, date: new Date(group.timeUtc) })).filter(group => !Number.isNaN(group.date.getTime())).sort((a,b) => a.date - b.date);
       const slots = [...new Set(groups.map(group => group.date.getTime()))];
       if (!slots.length) return;
+      const activeTees = [...new Set(groups.map(group => String(group.tee)))];
+      teeTimeGroups.classList.toggle('is-single-tee', activeTees.length === 1);
       const first = slots[0];
       const last = slots[slots.length - 1];
       const nowTime = now.getTime();
@@ -2469,7 +2472,8 @@
       teeTimeStatus.textContent = state === 'live' ? 'Scheduled on the tee now' : state === 'break' ? 'Morning wave complete' : 'Next on the tee';
       teeTimeTitle.textContent = state === 'live' ? 'On the tee' : state === 'break' ? 'Afternoon wave' : 'Coming up';
       teeTimeValue.textContent = formatTeeSlot(selectedDate, includeDate);
-      teeTimeRound.textContent = state === 'break' ? 'Round ' + officialTeeTimes.round + ' · Next groups from Tee Nos. 1 & 10' : 'Round ' + officialTeeTimes.round + ' · Official groupings';
+      const teeDescription = activeTees.length === 1 ? 'Tee No. ' + activeTees[0] + ' groupings' : 'Official groupings';
+      teeTimeRound.textContent = state === 'break' ? 'Round ' + officialTeeTimes.round + ' · Next groups from ' + teeDescription : 'Round ' + officialTeeTimes.round + ' · ' + teeDescription;
       teeTimeGroups.hidden = false;
       teeTimeMessage.hidden = true;
       const nextTime = slots[slotIndex + 1];
